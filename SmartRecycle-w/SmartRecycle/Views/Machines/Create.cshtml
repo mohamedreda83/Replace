@@ -1,0 +1,105 @@
+﻿@model SmartRecycle.Models.Machines
+
+@{
+    ViewData["Title"] = "إضافة ماكينة جديدة";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-plus-circle"></i> إضافة ماكينة جديدة
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <!-- Location -->
+                        <div class="mb-3">
+                            <label asp-for="Location" class="form-label">
+                                <i class="fas fa-map-marker-alt"></i> موقع الماكينة <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="Location" class="form-control" placeholder="مثال: مكتبة الجامعة - الدور الأول" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label">
+                                <i class="fas fa-toggle-on"></i> حالة الماكينة <span class="text-danger">*</span>
+                            </label>
+                            <select asp-for="Status" class="form-select">
+                                <option value="Active" selected>نشطة (Active)</option>
+                                <option value="Inactive">غير نشطة (Inactive)</option>
+                                <option value="Maintenance">قيد الصيانة (Maintenance)</option>
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+
+                        <!-- Last Maintenance Date -->
+                        <div class="mb-3">
+                            <label asp-for="LastMaintenanceDate" class="form-label">
+                                <i class="fas fa-tools"></i> تاريخ آخر صيانة
+                            </label>
+                            <input asp-for="LastMaintenanceDate" type="date" class="form-control" />
+                            <small class="form-text text-muted">اختياري - يمكن تركه فارغاً</small>
+                        </div>
+
+                        <!-- API Key -->
+                        <div class="mb-3">
+                            <label asp-for="ApiKey" class="form-label">
+                                <i class="fas fa-key"></i> API Key
+                            </label>
+                            <div class="input-group">
+                                <input asp-for="ApiKey" type="text" class="form-control" placeholder="اختياري" />
+                                <button class="btn btn-outline-secondary" type="button" onclick="generateApiKey()">
+                                    <i class="fas fa-random"></i> توليد
+                                </button>
+                            </div>
+                            <small class="form-text text-muted">اختياري - يمكن توليد مفتاح عشوائي</small>
+                        </div>
+
+                        <!-- Info Note -->
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>ملاحظة:</strong> سيتم توليد URL_GUID تلقائياً عند الإضافة
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> رجوع
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> حفظ الماكينة
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function generateApiKey() {
+            // توليد API Key عشوائي
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let apiKey = 'SK_';
+            for (let i = 0; i < 32; i++) {
+                apiKey += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('ApiKey').value = apiKey;
+        }
+    </script>
+}

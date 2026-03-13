@@ -1,0 +1,662 @@
+﻿/* ===================================
+   MODERN MINIMALIST SHOP DESIGN 2024
+   مع 3D Effects & WebGL Animations
+   =================================== */
+
+/* تنسيقات عامة */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    direction: rtl;
+    text-align: right;
+    overflow-x: hidden;
+    background: #fafafa;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+
+/* خلفية متحركة بسيطة WebGL-style */
+.shop-page {
+    margin-bottom: 2rem;
+    position: relative;
+    padding-top: 1rem;
+}
+
+    .shop-page::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 15% 20%, rgba(40, 167, 69, 0.02) 0%, transparent 40%), radial-gradient(circle at 85% 80%, rgba(0, 123, 255, 0.02) 0%, transparent 40%);
+        z-index: -1;
+        animation: subtleMove 25s ease-in-out infinite;
+    }
+
+@keyframes subtleMove {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* ===================================
+   SIDEBAR - تصميم نظيف مع 3D
+   =================================== */
+.shop-sidebar .card {
+    border: none;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 1.5rem;
+    transform-style: preserve-3d;
+}
+
+    .shop-sidebar .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+.shop-sidebar .card-header {
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.shop-sidebar .list-group-item {
+    border: none;
+    border-bottom: 1px solid #f8f9fa;
+    padding: 0.75rem 1.25rem;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    color: #555;
+    background: transparent;
+}
+
+    .shop-sidebar .list-group-item:last-child {
+        border-bottom: none;
+    }
+
+    .shop-sidebar .list-group-item:hover {
+        background: #fafafa;
+        padding-right: 1.5rem;
+        color: #28a745;
+    }
+
+    .shop-sidebar .list-group-item i {
+        font-size: 0.85rem;
+        opacity: 0.7;
+        transition: all 0.2s;
+    }
+
+    .shop-sidebar .list-group-item:hover i {
+        opacity: 1;
+        transform: translateX(-2px);
+    }
+
+    .shop-sidebar .list-group-item.active {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        font-weight: 500;
+        box-shadow: 0 2px 8px rgba(40, 167, 69, 0.25);
+    }
+
+        .shop-sidebar .list-group-item.active i {
+            opacity: 1;
+            color: white;
+        }
+
+/* ===================================
+   PRODUCTS SECTION - تصميم Minimalist
+   =================================== */
+.shop-products .card {
+    border: none;
+    border-radius: 1rem;
+    overflow: visible;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.shop-products .card-header {
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    border-bottom: 1px solid #f0f0f0;
+    background: white;
+}
+
+/* ===================================
+   PRODUCT CARDS - أحجام أصغر + 3D
+   =================================== */
+.shop-products .col-6 .card,
+.shop-products .col-md-4 .card {
+    height: 100%;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    background: white;
+    border-radius: 0.875rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+    .shop-products .col-6 .card:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+
+/* صورة المنتج - تصميم نظيف */
+.product-image-container {
+    position: relative;
+    height: 200px;
+    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.shop-products .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(1) contrast(1.02);
+}
+
+.shop-products .card:hover .card-img-top {
+    transform: scale(1.06);
+    filter: brightness(1.02) contrast(1.05);
+}
+
+/* Badge الفئة */
+.product-category-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+}
+
+    .product-category-badge .badge {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.7rem;
+        font-weight: 500;
+        border-radius: 0.5rem;
+        background: rgba(255, 255, 255, 0.95) !important;
+        color: #666 !important;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        transition: all 0.2s;
+    }
+
+.shop-products .card:hover .product-category-badge .badge {
+    background: white !important;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* معلومات المنتج - White Space */
+.shop-products .card-body {
+    padding: 1.25rem;
+}
+
+.product-title {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+    margin-bottom: 0.625rem;
+    height: 38px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    transition: color 0.2s;
+}
+
+.shop-products .card:hover .product-title {
+    color: #28a745;
+}
+
+.product-description {
+    color: #777;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 38px;
+    line-height: 1.5;
+}
+
+/* Badges المنتج - أحجام أصغر */
+.product-highlights {
+    margin-bottom: 1rem;
+}
+
+.product-badge {
+    border-radius: 0.5rem;
+    padding: 0.4rem 0.65rem;
+    font-weight: 500;
+    display: inline-block;
+    color: white;
+    font-size: 0.75rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .product-badge:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-badge.price {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    }
+
+    .product-badge.in-stock {
+        background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    }
+
+    .product-badge.out-stock {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    }
+
+    .product-badge i {
+        font-size: 0.7rem;
+        margin-left: 0.15rem;
+    }
+
+/* الأزرار - تصميم نظيف مع 3D */
+.shop-products .btn-primary {
+    border-radius: 0.625rem;
+    padding: 0.625rem 1.25rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    width: 100%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25);
+    letter-spacing: -0.01em;
+}
+
+    .shop-products .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(0, 123, 255, 0.35);
+        background: linear-gradient(135deg, #0069d9 0%, #004a99 100%);
+    }
+
+    .shop-products .btn-primary:active {
+        transform: translateY(0);
+    }
+
+    .shop-products .btn-primary i {
+        font-size: 0.8rem;
+        transition: transform 0.2s;
+    }
+
+    .shop-products .btn-primary:hover i {
+        transform: translateX(-2px);
+    }
+
+/* ===================================
+   ALERTS - تصميم نظيف
+   =================================== */
+.alert {
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    font-size: 0.9rem;
+    animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    color: #155724;
+    border-right: 3px solid #28a745;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    color: #721c24;
+    border-right: 3px solid #dc3545;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+    color: #0c5460;
+    border-right: 3px solid #17a2b8;
+}
+
+.alert i {
+    font-size: 0.9rem;
+}
+
+/* ===================================
+   MODAL - تصميم نظيف
+   =================================== */
+.modal-content {
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    animation: modalFadeIn 0.25s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-header {
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+.modal .list-group-item {
+    border: none;
+    border-bottom: 1px solid #f8f9fa;
+    padding: 0.875rem 1.25rem;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+    .modal .list-group-item:hover {
+        background: #fafafa;
+    }
+
+    .modal .list-group-item.active {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+    }
+
+/* ===================================
+   LOADING ANIMATION
+   =================================== */
+.card-img-top {
+    background: linear-gradient( 90deg, #f5f5f5 0%, #ebebeb 50%, #f5f5f5 100% );
+    background-size: 200% 100%;
+    animation: shimmer 1.8s infinite;
+}
+
+    .card-img-top[src] {
+        background: none;
+        animation: none;
+    }
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ===================================
+   RESPONSIVE - التصميم المتجاوب
+   =================================== */
+
+/* Medium screens */
+@media (max-width: 991.98px) {
+    .shop-products .col-6 .card {
+        margin-bottom: 1rem;
+    }
+
+    .product-image-container {
+        height: 180px;
+    }
+
+    .product-title {
+        font-size: 0.9rem;
+        height: 36px;
+    }
+
+    .product-description {
+        font-size: 0.75rem;
+        height: 34px;
+    }
+
+    .product-badge {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* Small screens - Mobile First */
+@media (max-width: 767.98px) {
+    body {
+        background: white;
+    }
+
+    .shop-page {
+        padding-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .shop-sidebar {
+        display: none;
+    }
+
+    .shop-products .col-6 {
+        padding: 0 0.4rem;
+    }
+
+    .shop-products .card-body {
+        padding: 1rem 0.875rem;
+    }
+
+    .shop-products .card-header {
+        padding: 0.875rem 1rem;
+        font-size: 1rem;
+    }
+
+    .product-image-container {
+        height: 150px;
+    }
+
+    .product-title {
+        font-size: 0.85rem;
+        height: 34px;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-description {
+        font-size: 0.725rem;
+        height: 32px;
+        margin-bottom: 0.75rem;
+        -webkit-line-clamp: 2;
+    }
+
+    .product-highlights {
+        margin-bottom: 0.75rem;
+    }
+
+    .product-badge {
+        padding: 0.35rem 0.55rem;
+        font-size: 0.675rem;
+        border-radius: 0.4rem;
+    }
+
+        .product-badge i {
+            font-size: 0.65rem;
+        }
+
+    .shop-products .btn-primary {
+        padding: 0.55rem 1rem;
+        font-size: 0.825rem;
+        border-radius: 0.5rem;
+    }
+
+    .shop-products .col-6 .card {
+        border-radius: 0.75rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.03);
+    }
+
+        .shop-products .col-6 .card:hover {
+            transform: translateY(-4px);
+        }
+
+    .product-category-badge {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+        .product-category-badge .badge {
+            padding: 0.35rem 0.6rem;
+            font-size: 0.65rem;
+            border-radius: 0.4rem;
+        }
+
+    .alert {
+        padding: 0.875rem 1rem;
+        font-size: 0.85rem;
+        border-radius: 0.625rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 575.98px) {
+    .shop-products .card-img-top {
+        padding: 1rem;
+    }
+
+    .product-image-container {
+        height: 140px;
+    }
+}
+
+/* ===================================
+   PERFORMANCE OPTIMIZATION
+   =================================== */
+.card,
+.btn,
+.badge,
+.alert,
+.list-group-item {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* تحسين الانتقالات */
+.card,
+.btn,
+.list-group-item {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ===================================
+   SUBTLE PARALLAX EFFECT
+   =================================== */
+@media (min-width: 992px) {
+    .shop-page {
+        transform-style: preserve-3d;
+    }
+
+    .shop-sidebar {
+        transform: translateZ(10px);
+    }
+
+    .shop-products {
+        transform: translateZ(20px);
+    }
+}
+
+/* ===================================
+   MICRO-INTERACTIONS
+   =================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.shop-products .col-6,
+.shop-products .col-md-4 {
+    animation: fadeInUp 0.5s ease-out backwards;
+}
+
+    .shop-products .col-6:nth-child(1),
+    .shop-products .col-md-4:nth-child(1) {
+        animation-delay: 0.05s;
+    }
+
+    .shop-products .col-6:nth-child(2),
+    .shop-products .col-md-4:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+    .shop-products .col-6:nth-child(3),
+    .shop-products .col-md-4:nth-child(3) {
+        animation-delay: 0.15s;
+    }
+
+    .shop-products .col-6:nth-child(4),
+    .shop-products .col-md-4:nth-child(4) {
+        animation-delay: 0.2s;
+    }
+
+    .shop-products .col-6:nth-child(5),
+    .shop-products .col-md-4:nth-child(5) {
+        animation-delay: 0.25s;
+    }
+
+    .shop-products .col-6:nth-child(6),
+    .shop-products .col-md-4:nth-child(6) {
+        animation-delay: 0.3s;
+    }

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SmartRecycle.Models.Order>
+@{
+    ViewData["Title"] = "الطلبات";
+    Layout = "_Layout";
+}
+<link href="~/css/o.css" rel="stylesheet" />
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0 fw-bold">قائمة الطلبات</h3>
+        </div>
+        <div class="card-body bg-light">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover border text-center" style="background-color: #ffffff;">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th class="fw-bold">رقم الطلب</th>
+                            <th class="fw-bold">اسم المستخدم</th>
+                            <th class="fw-bold">تاريخ الطلب</th>
+                            <th class="fw-bold">إجمالي النقاط</th>
+                            <th class="fw-bold">الحالة</th>
+                            <th class="fw-bold">الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="align-middle">@item.Id</td>
+                                <td class="align-middle">@item.User.Username</td>
+                                <td class="align-middle">@item.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td class="align-middle">@item.TotalPoints</td>
+                                <td class="align-middle">
+                                    @if (item.Status == "Pending" || item.Status == "معلق")
+                                    {
+                                        <span class="badge bg-warning text-dark fw-bold">معلق</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success fw-bold">@item.Status</span>
+                                    }
+                                </td>
+                                <td class="align-middle">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm mx-1" title="تفاصيل">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm mx-1" title="تعديل">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

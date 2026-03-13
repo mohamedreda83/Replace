@@ -1,0 +1,46 @@
+﻿/* تحسين تباين الألوان والقراءة */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Cairo', sans-serif;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-header {
+    border-bottom: 3px solid #198754;
+    font-weight: bold;
+}
+
+.table {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+    .table th {
+        font-size: 1.05rem;
+    }
+
+    .table td {
+        font-size: 0.95rem;
+        color: #333;
+    }
+
+.badge {
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+}
+
+.btn {
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+/* تحسين المظهر على الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .table th, .table td {
+        font-size: 0.85rem;
+    }
+}

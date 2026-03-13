@@ -1,0 +1,215 @@
+﻿ @model SmartRecycle.Controllers.ReplyMessageViewModel
+@{
+    ViewData["Title"] = "الرد على الرسالة";
+}
+
+<style>
+    .reply-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 30px;
+    }
+
+    .original-message {
+        background: #f9f9f9;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 30px;
+        border-right: 5px solid var(--primary-green);
+    }
+
+    .original-message h4 {
+        color: var(--dark-green);
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .message-detail {
+        margin: 10px 0;
+        padding: 10px;
+        background: white;
+        border-radius: 5px;
+    }
+
+    .message-detail strong {
+        color: var(--dark-green);
+        display: inline-block;
+        min-width: 100px;
+    }
+
+    .reply-form {
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .reply-form h3 {
+        color: var(--dark-green);
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .btn-cancel {
+        background: #9E9E9E;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+        background: #757575;
+    }
+
+    .email-preview {
+        background: #f5f5f5;
+        border: 2px dashed #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .email-preview h5 {
+        color: var(--dark-green);
+        margin-bottom: 15px;
+    }
+
+    .preview-content {
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+    }
+</style>
+
+<div class="reply-container">
+    <div class="page-header">
+        <h2>✉️ الرد على الرسالة</h2>
+    </div>
+
+    <!-- Original Message -->
+    <div class="original-message">
+        <h4>📩 الرسالة الأصلية</h4>
+        <div class="message-detail">
+            <strong>من:</strong> @Model.ToEmail
+        </div>
+        <div class="message-detail">
+            <strong>الموضوع:</strong> @Model.OriginalSubject
+        </div>
+        <div class="message-detail">
+            <strong>الرسالة:</strong>
+            <p style="margin-top: 10px; line-height: 1.6;">@Model.OriginalMessage</p>
+        </div>
+    </div>
+
+    <!-- Reply Form -->
+    <div class="reply-form">
+        <h3>↩️ اكتب الرد</h3>
+        
+        <form asp-action="ReplyMessage" method="post" id="replyForm">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="MessageId" />
+            <input type="hidden" asp-for="ToEmail" />
+            <input type="hidden" asp-for="OriginalSubject" />
+            <input type="hidden" asp-for="OriginalMessage" />
+
+            <div class="form-group">
+                <label>إلى</label>
+                <input type="text" value="@Model.ToEmail" readonly class="form-control" style="background: #f5f5f5;" />
+            </div>
+
+            <div class="form-group">
+                <label>عنوان الرد</label>
+                <input asp-for="ReplySubject" class="form-control" required />
+                <span asp-validation-for="ReplySubject" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>نص الرد</label>
+                <textarea asp-for="ReplyMessage" class="form-control" 
+                          placeholder="اكتب ردك هنا..." 
+                          style="min-height: 250px;" 
+                          required
+                          oninput="updatePreview()"></textarea>
+                <span asp-validation-for="ReplyMessage" class="text-danger"></span>
+            </div>
+
+            <!-- Email Preview -->
+            <div class="email-preview">
+                <h5>👁️ معاينة البريد الإلكتروني</h5>
+                <div class="preview-content">
+                    <div style="background-color: #4CAF50; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+                        <h2 style="margin: 0;">Replace Support</h2>
+                    </div>
+                    <div style="padding: 20px;">
+                        <p>مرحباً،</p>
+                        <div id="previewMessage" style="margin: 20px 0; line-height: 1.6;">
+                            اكتب ردك لرؤية المعاينة...
+                        </div>
+                        <hr style="border: 1px solid #eee; margin: 20px 0;">
+                        <p style="color: #666; font-size: 12px;">
+                            رسالتك الأصلية:<br>
+                            @Model.OriginalMessage
+                        </p>
+                    </div>
+                    <div style="background-color: #f5f5f5; padding: 15px; text-align: center; font-size: 12px; border-radius: 0 0 8px 8px;">
+                        <p style="margin: 0;">شكراً لاستخدامك Replace</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary" style="flex: 1;">
+                    📤 إرسال الرد
+                </button>
+                <a href="@Url.Action("Messages")" class="btn-cancel">
+                    ✖️ إلغاء
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    function updatePreview() {
+        const message = document.querySelector('[name="ReplyMessage"]').value;
+        const preview = document.getElementById('previewMessage');
+        
+        if (message.trim()) {
+            // تحويل النص إلى فقرات
+            const paragraphs = message.split('\n').filter(p => p.trim());
+            preview.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+        } else {
+            preview.innerHTML = 'اكتب ردك لرؤية المعاينة...';
+        }
+    }
+
+    // تأكيد قبل الإرسال
+    document.getElementById('replyForm').addEventListener('submit', function(e) {
+        if (!confirm('هل أنت متأكد من إرسال هذا الرد؟')) {
+            e.preventDefault();
+        }
+    });
+</script>
+@Html.AntiForgeryToken()
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

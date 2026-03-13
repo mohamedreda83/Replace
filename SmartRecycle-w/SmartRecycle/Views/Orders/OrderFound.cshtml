@@ -1,0 +1,155 @@
+﻿<!-- Views/Orders/OrderFound.cshtml -->
+@model SmartRecycle.Models.Order
+
+@{
+    ViewData["Title"] = "تفاصيل الطلب";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title" style="color: black;">تفاصيل الطلب رقم @Model.Id</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 style="color: black;">معلومات الطلب</h5>
+                            <table class="table">
+                                <tr>
+                                    <th style="color: black;">رقم الطلب:</th>
+                                    <td style="color: black;">@Model.Id</td>
+                                </tr>
+                                <tr>
+                                    <th style="color: black;">تاريخ الطلب:</th>
+                                    <td style="color: black;">@Model.OrderDate.ToString("yyyy/MM/dd HH:mm")</td>
+                                </tr>
+                                <tr>
+                                    <th style="color: black;">الحالة:</th>
+                                    <td>
+                                        <span class="badge @(Model.Status == "مكتمل" ? "badge-success" : Model.Status == "ملغي" ? "badge-danger" : Model.Status == "معلق" ? "badge-secondary" : "badge-warning")" style="color: black;">
+                                            @Model.Status
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="color: black;">الفرع المختار:</th>
+                                    <td style="color: black;">@Model.SelectedBranch</td>
+                                </tr>
+                                <tr>
+                                    <th style="color: black;">إجمالي النقاط:</th>
+                                    <td style="color: black;">@Model.TotalPoints</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 style="color: black;">معلومات العميل</h5>
+                            <table class="table">
+                                <tr>
+                                    <th style="color: black;">اسم العميل:</th>
+                                    <td style="color: black;">@Model.User.Username</td>
+                                </tr>
+                                <tr>
+                                    <th style="color: black;">البريد الإلكتروني:</th>
+                                    <td style="color: black;">@Model.User.Gmail</td>
+                                </tr>
+                                <tr>
+                                    <th style="color: black;">رقم الهاتف:</th>
+                                    <td style="color: black;">@Model.User.Phone</td>
+                                </tr>
+                                <tr>
+                                    <th style="color: black;">النقاط الحالية:</th>
+                                    <td style="color: black;">@Model.User.Points</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h5 style="color: black;">تفاصيل المنتجات</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="color: black;">المنتج</th>
+                                    <th style="color: black;">الكمية</th>
+                                    <th style="color: black;">النقاط لكل قطعة</th>
+                                    <th style="color: black;">إجمالي النقاط</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderItems)
+                                {
+                                    <tr>
+                                        <td style="color: black;">@item.Product.Name</td>
+                                        <td style="color: black;">@item.Quantity</td>
+                                        <td style="color: black;">@item.PointsPerItem</td>
+                                        <td style="color: black;">@(item.Quantity * item.PointsPerItem)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    @* إظهار أزرار الإجراءات فقط للطلبات التي ليست مكتملة أو ملغية أو معلقة *@
+                    @if (Model.Status != "مكتمل" && Model.Status != "ملغي" && Model.Status != "معلق" && Model.Status != "متاح للاستلام - يرجى اختيار الفرع")
+                    {
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <form method="post" asp-action="CompleteOrder" onsubmit="return confirm('هل أنت متأكد من تسليم الطلب؟')">
+                                    <input type="hidden" name="orderId" value="@Model.Id" />
+                                    <button type="submit" class="btn btn-success btn-block">
+                                        <i class="fas fa-check"></i> تسليم الطلب
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <form method="post" asp-action="CancelOrderAdmin" onsubmit="return confirm('هل أنت متأكد من إلغاء الطلب؟')">
+                                    <input type="hidden" name="orderId" value="@Model.Id" />
+                                    <button type="submit" class="btn btn-danger btn-block">
+                                        <i class="fas fa-times"></i> إلغاء الطلب
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info mt-3" style="color: black;">
+                            @if (Model.Status == "مكتمل")
+                            {
+                                <i class="fas fa-check-circle">
+                                تم تسليم هذا الطلب بنجاح
+                                </i>
+                                    }
+                            else if (Model.Status == "ملغي")
+                            {
+                                <i class="fas fa-times-circle">
+                                هذا الطلب ملغي
+                                </i>
+                                    }
+                            else if (Model.Status == "معلق")
+                            {
+                                <i class="fas fa-pause-circle">
+                                هذا الطلب معلق
+                                </i>
+                                    }
+                            else if (Model.Status == "متاح للاستلام - يرجى اختيار الفرع")
+                            {
+                                <i class="fas fa-pause-circle">
+                                    قم بتاكيد اخيار الفرع اولا
+                                </i>
+                            }
+                        </div>
+                    }
+
+                    <div class="mt-3">
+                        <a asp-action="SearchOrder" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> العودة للبحث
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,169 @@
+﻿@model SmartRecycle.Models.Order
+
+@{
+    ViewData["Title"] = "تعديل الطلب";
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3>تعديل حالة الطلب رقم: @Model.Id</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-secondary text-white">
+                            معلومات الطلب
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4 text-end">رقم الطلب:</dt>
+                                <dd class="col-sm-8">@Model.Id</dd>
+
+                                <dt class="col-sm-4 text-end">تاريخ الطلب:</dt>
+                                <dd class="col-sm-8">@Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                                <dt class="col-sm-4 text-end">اسم المستخدم:</dt>
+                                <dd class="col-sm-8">@Model.User.Username</dd>
+                                <dt class="col-sm-4 text-end">العنوان:</dt>
+                                <dd class="col-sm-8">@Model.User.Address</dd>
+                                <dt class="col-sm-4 text-end">اقرب فرع:</dt>
+                                <dd class="col-sm-8">@Model.User.Branch</dd>
+
+                                <dt class="col-sm-4 text-end">إجمالي النقاط:</dt>
+                                <dd class="col-sm-8">@Model.TotalPoints</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-secondary text-white">
+                            الحالة الحالية
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                @if (Model.Status == "Pending" || Model.Status == "معلق")
+                                {
+                                    <div class="alert alert-warning">
+                                        <h4><i class="fas fa-clock"></i> معلق</h4>
+                                        <p>الطلب قيد الانتظار، يرجى تحديد الفروع المتاحة لاستلام الطلب</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-success">
+                                        <h4><i class="fas fa-check-circle"></i> @Model.Status</h4>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    تحديد الفروع المتاحة لاستلام الطلب
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+                                <div class="form-group mb-4">
+                                    <label class="form-label fw-bold mb-3">اختر الفروع المتاحة لاستلام الطلب:</label>
+                                    <div class="row">
+                                        @foreach (var branch in ViewBag.Branches)
+                                        {
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="selectedBranches" value="@branch.Value"
+                                                           id="branch@(branch.Value)">
+                                                    <label class="form-check-label" for="branch@(branch.Value)">
+                                                        <i class="fas fa-map-marker-alt text-primary"></i> @branch.Text
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <small class="text-muted">يمكنك اختيار أكثر من فرع لإتاحة المرونة للمستخدم</small>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-success btn-lg">
+                                        <i class="fas fa-check"></i> تأكيد تحديد الفروع
+                                    </button>
+                                    <a asp-action="Index" class="btn btn-secondary btn-lg">
+                                        <i class="fas fa-times"></i> إلغاء
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header bg-secondary text-white">
+                    منتجات الطلب
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>المنتج</th>
+                                    <th>الكمية</th>
+                                    <th>النقاط للوحدة</th>
+                                    <th>إجمالي النقاط</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderItems)
+                                {
+                                    <tr>
+                                        <td>@item.Product.Name</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.PointsPerItem</td>
+                                        <td>@(item.Quantity * item.PointsPerItem)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="3" class="text-end">الإجمالي:</th>
+                                    <th>@Model.TotalPoints</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-check {
+        padding: 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+        .form-check:hover {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+
+    .form-check-input:checked + .form-check-label {
+        color: #007bff;
+        font-weight: bold;
+    }
+</style>

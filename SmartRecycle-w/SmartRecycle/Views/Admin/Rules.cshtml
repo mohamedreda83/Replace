@@ -1,0 +1,237 @@
+﻿@model List<SmartRecycle.Models.Rule>
+@{
+    ViewData["Title"] = "إدارة القواعد";
+}
+
+<style>
+    .admin-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+    }
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid var(--primary-green);
+    }
+
+        .page-header h2 {
+            color: var(--dark-green);
+            font-size: 2rem;
+        }
+
+    .btn-primary {
+        background: var(--primary-green);
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+    .rules-table {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+        .rules-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .rules-table th {
+            background: var(--primary-green);
+            color: white;
+            padding: 15px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .rules-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .rules-table tr:hover {
+            background: #f5f5f5;
+        }
+
+    .badge {
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .badge-active {
+        background: #4CAF50;
+        color: white;
+    }
+
+    .badge-inactive {
+        background: #f44336;
+        color: white;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-sm {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-edit {
+        background: #2196F3;
+        color: white;
+    }
+
+        .btn-edit:hover {
+            background: #1976D2;
+        }
+
+    .btn-delete {
+        background: #f44336;
+        color: white;
+    }
+
+        .btn-delete:hover {
+            background: #c62828;
+        }
+
+    .btn-toggle {
+        background: #FF9800;
+        color: white;
+    }
+
+        .btn-toggle:hover {
+            background: #F57C00;
+        }
+
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #999;
+    }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+</style>
+
+<div class="admin-container">
+    <div class="page-header">
+        <h2>📋 إدارة القواعد والشروط</h2>
+        <a href="@Url.Action("CreateRule")" class="btn-primary">+ إضافة قاعدة جديدة</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    @if (Model.Any())
+    {
+        <div class="rules-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>الترتيب</th>
+                        <th>العنوان</th>
+                        <th>الوصف</th>
+                        <th>الحالة</th>
+                        <th>تاريخ الإنشاء</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rule in Model)
+                    {
+                        <tr>
+                            <td><strong>@rule.Order</strong></td>
+                            <td><strong>@rule.Title</strong></td>
+                            <td>@(rule.Description.Length > 100 ? rule.Description.Substring(0, 100) + "..." : rule.Description)</td>
+                            <td>
+                                <span class="badge @(rule.IsActive ? "badge-active" : "badge-inactive")">
+                                    @(rule.IsActive ? "نشط" : "غير نشط")
+                                </span>
+                            </td>
+                            <td>@rule.CreatedAt.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="@Url.Action("EditRule", new { id = rule.Id })" class="btn-sm btn-edit">✏️ تعديل</a>
+                                    <button onclick="toggleStatus(@rule.Id, @rule.IsActive.ToString().ToLower())"
+                                            class="btn-sm btn-toggle">
+                                        @(rule.IsActive ? "إيقاف" : "تفعيل")
+                                    </button>
+                                    <form asp-action="DeleteRule" asp-route-id="@rule.Id" method="post" style="display: inline;"
+                                          onsubmit="return confirm('هل أنت متأكد من حذف هذه القاعدة؟')">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn-sm btn-delete">🗑️ حذف</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <i>📋</i>
+            <h3>لا توجد قواعد حالياً</h3>
+            <p>ابدأ بإضافة قواعد وشروط الاستخدام للموقع</p>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function toggleStatus(ruleId, currentStatus) {
+            if (confirm(currentStatus ? 'هل تريد إيقاف هذه القاعدة؟' : 'هل تريد تفعيل هذه القاعدة؟')) {
+                fetch('@Url.Action("ToggleRuleStatus")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': '@Html.AntiForgeryToken()'
+                    },
+                    body: JSON.stringify({ id: ruleId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    }
+                });
+            }
+        }
+    </script>
+}

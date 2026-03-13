@@ -1,0 +1,937 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\machines\\machinehome_v2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\machines\\machinehome_v2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\controllers\\machinescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\controllers\\machinescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\maintenance\\monitor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\maintenance\\monitor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\machines\\monitor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\machines\\monitor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\controllers\\maintenancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\controllers\\maintenancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\services\\maintenancelogwatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\services\\maintenancelogwatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\hubs\\maintenancehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\hubs\\maintenancehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\models\\modelsdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\models\\modelsdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\machines\\machinehome_v1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\machines\\machinehome_v1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\machines\\logintomachine.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\machines\\logintomachine.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\models\\smartrecyclecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\models\\smartrecyclecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20260224213929_after_add_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SmartRecycle\\Migrations\\20260224213929_after_add_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\models\\detection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\models\\detection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\wwwroot\\css\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\wwwroot\\css\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\controllers\\errorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\controllers\\errorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\controllers\\userprofilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\controllers\\userprofilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\controllers\\detectionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\controllers\\detectionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\wwwroot\\js\\smart-recycle.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\wwwroot\\js\\smart-recycle.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\wwwroot\\css\\shop.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\wwwroot\\css\\shop.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\shop\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\shop\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\controllers\\shopcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\controllers\\shopcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\admin\\replymessage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\admin\\replymessage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\admin\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\admin\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\admin\\createrule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\admin\\createrule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\admin\\editrule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\admin\\editrule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\admin\\createuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\admin\\createuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\admin\\messages.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\admin\\messages.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\admin\\ratings.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\admin\\ratings.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\admin\\rules.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\admin\\rules.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\wwwroot\\css\\machine-pages-unified-style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\wwwroot\\css\\machine-pages-unified-style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\wwwroot\\js\\webgl-background-script.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\wwwroot\\js\\webgl-background-script.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\machines\\logoutsuccess.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\machines\\logoutsuccess.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\error\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\error\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\error\\webgl.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\error\\webgl.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\Roslyn\\Microsoft.CSharp.Core.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\error\\robot.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\error\\robot.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\views\\error\\lottie.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\views\\error\\lottie.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\migrations\\20251126191634_detection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\migrations\\20251126191634_detection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\repositories\\detectionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\repositories\\detectionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\repositories\\idetectionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\repositories\\idetectionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\migrations\\20251129203747_addhomepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\migrations\\20251129203747_addhomepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\migrations\\20251129211827_allownulls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\migrations\\20251129211827_allownulls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\migrations\\20251129211039_removeuserid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\migrations\\20251129211039_removeuserid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|c:\\users\\mohamed reda\\desktop\\smartrecycle-w\\smartrecycle-w\\smartrecycle\\migrations\\20260224214125_after_add_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{079E71C8-A4D1-41AA-869F-C12126FA3BF6}|SmartRecycle\\SmartRecycle.csproj|solutionrelative:smartrecycle\\migrations\\20260224214125_after_add_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MachineHome_V2.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Machines\\MachineHome_V2.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Machines\\MachineHome_V2.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Machines\\MachineHome_V2.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Machines\\MachineHome_V2.cshtml",
+              "ViewState": "AgIAADsBAAAAAAAAAAAkwD8BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-24T22:42:42.703Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MaintenanceLogWatcher.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Services\\MaintenanceLogWatcher.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Services\\MaintenanceLogWatcher.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Services\\MaintenanceLogWatcher.cs",
+              "RelativeToolTip": "SmartRecycle\\Services\\MaintenanceLogWatcher.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAArwE4AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T22:31:01.027Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Monitor.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Machines\\Monitor.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Machines\\Monitor.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Machines\\Monitor.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Machines\\Monitor.cshtml",
+              "ViewState": "AgIAAIECAAAAAAAAAAAkwJkCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-24T22:30:39.681Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MachinesController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\MachinesController.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Controllers\\MachinesController.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\MachinesController.cs",
+              "RelativeToolTip": "SmartRecycle\\Controllers\\MachinesController.cs",
+              "ViewState": "AgIAAN0BAAAAAAAAAAAqwOQBAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T14:13:15.829Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\appsettings.json",
+              "RelativeDocumentMoniker": "SmartRecycle\\appsettings.json",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\appsettings.json",
+              "RelativeToolTip": "SmartRecycle\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-28T14:08:25.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Monitor.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Maintenance\\Monitor.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Maintenance\\Monitor.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Maintenance\\Monitor.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Maintenance\\Monitor.cshtml",
+              "ViewState": "AgIAAO8DAAAAAAAAAAAkwBUEAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-24T22:37:16.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Program.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Program.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Program.cs",
+              "RelativeToolTip": "SmartRecycle\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:04:51.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MaintenanceController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\MaintenanceController.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Controllers\\MaintenanceController.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\MaintenanceController.cs",
+              "RelativeToolTip": "SmartRecycle\\Controllers\\MaintenanceController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T22:23:46.025Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MaintenanceHub.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Hubs\\MaintenanceHub.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Hubs\\MaintenanceHub.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Hubs\\MaintenanceHub.cs",
+              "RelativeToolTip": "SmartRecycle\\Hubs\\MaintenanceHub.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T22:28:40.165Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Modelsdatabase.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Models\\Modelsdatabase.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Models\\Modelsdatabase.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Models\\Modelsdatabase.cs",
+              "RelativeToolTip": "SmartRecycle\\Models\\Modelsdatabase.cs",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAcwLUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T14:17:55.06Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "SmartRecycle\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAD4v2AAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T20:12:40.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "20260224214125_after_add_log.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20260224214125_after_add_log.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Migrations\\20260224214125_after_add_log.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20260224214125_after_add_log.cs",
+              "RelativeToolTip": "SmartRecycle\\Migrations\\20260224214125_after_add_log.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAQwFQAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T21:41:25.503Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MachineHome_V1.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Machines\\MachineHome_V1.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Machines\\MachineHome_V1.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Machines\\MachineHome_V1.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Machines\\MachineHome_V1.cshtml",
+              "ViewState": "AgIAAG4BAAAAAAAAAAAkwHkBAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T14:14:28.362Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAALcAAAAAAAAAAAAAAMEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-29T21:32:46.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LoginToMachine.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Machines\\LoginToMachine.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Machines\\LoginToMachine.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Machines\\LoginToMachine.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Machines\\LoginToMachine.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAABAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T18:11:26.8Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SmartRecycleContext.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Models\\SmartRecycleContext.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Models\\SmartRecycleContext.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Models\\SmartRecycleContext.cs",
+              "RelativeToolTip": "SmartRecycle\\Models\\SmartRecycleContext.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAxwAsAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:12:55.961Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "20260224213929_after_add_log.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20260224213929_after_add_log.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Migrations\\20260224213929_after_add_log.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20260224213929_after_add_log.cs",
+              "RelativeToolTip": "SmartRecycle\\Migrations\\20260224213929_after_add_log.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T21:39:30.054Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Detection.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Models\\Detection.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Models\\Detection.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Models\\Detection.cs",
+              "RelativeToolTip": "SmartRecycle\\Models\\Detection.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAcwBYAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:10:39.623Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "styles.css",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\css\\styles.css",
+              "RelativeDocumentMoniker": "SmartRecycle\\wwwroot\\css\\styles.css",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\css\\styles.css",
+              "RelativeToolTip": "SmartRecycle\\wwwroot\\css\\styles.css",
+              "ViewState": "AgIAAKELAAAAAAAAAAAcwLwLAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-12-01T20:14:37.237Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAEwCAAAAAAAAAAAowGQCAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-29T20:14:12.201Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "DetectionsController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\DetectionsController.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Controllers\\DetectionsController.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\DetectionsController.cs",
+              "RelativeToolTip": "SmartRecycle\\Controllers\\DetectionsController.cs",
+              "ViewState": "AgIAALIAAAAAAAAAAAAwwAsAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:09:43.384Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Shared\\Error.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Shared\\Error.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T14:41:52.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "SmartRecycle\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "SmartRecycle\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAANEBAAAAAAAAAAAcwOwBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-02-09T22:19:42.062Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "UserProfileController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\UserProfileController.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Controllers\\UserProfileController.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\UserProfileController.cs",
+              "RelativeToolTip": "SmartRecycle\\Controllers\\UserProfileController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAIBJwAcAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T19:57:04.727Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Dashboard\\Index.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Dashboard\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Dashboard\\Index.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Dashboard\\Index.cshtml",
+              "ViewState": "AgIAAFEAAAAAAAAAAIBJwGMAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-21T13:34:15.452Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Controllers\\DashboardController.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "SmartRecycle\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAawEsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-21T13:23:54.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ErrorController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\ErrorController.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Controllers\\ErrorController.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\ErrorController.cs",
+              "RelativeToolTip": "SmartRecycle\\Controllers\\ErrorController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwA0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T16:08:09.065Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "SmartRecycle\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAIIAAAAAAAAAAIBJwC8AAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T21:26:04.285Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "SmartRecycle\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwA4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T16:08:31.721Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ShopController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\ShopController.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Controllers\\ShopController.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\ShopController.cs",
+              "RelativeToolTip": "SmartRecycle\\Controllers\\ShopController.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAxwDUAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T19:57:05.805Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Shop\\Index.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Shop\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Shop\\Index.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Shop\\Index.cshtml",
+              "ViewState": "AgIAAL4AAAAAAAAAAAAowNAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-01T19:57:19.022Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "shop.css",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\css\\shop.css",
+              "RelativeDocumentMoniker": "SmartRecycle\\wwwroot\\css\\shop.css",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\css\\shop.css",
+              "RelativeToolTip": "SmartRecycle\\wwwroot\\css\\shop.css",
+              "ViewState": "AgIAAIMCAAAAAAAAAAAYwJYCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-12-01T19:57:37.223Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "smart-recycle.js",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\js\\smart-recycle.js",
+              "RelativeDocumentMoniker": "SmartRecycle\\wwwroot\\js\\smart-recycle.js",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\js\\smart-recycle.js",
+              "RelativeToolTip": "SmartRecycle\\wwwroot\\js\\smart-recycle.js",
+              "ViewState": "AgIAAE4BAAAAAAAAAIBJwFQBAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-12-01T20:20:26.368Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "SmartRecycle\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T19:57:03.471Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Products\\Index.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Products\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Products\\Index.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Products\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-01T19:56:04.513Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "20251129211827_allownulls.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20251129211827_allownulls.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Migrations\\20251129211827_allownulls.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20251129211827_allownulls.cs",
+              "RelativeToolTip": "SmartRecycle\\Migrations\\20251129211827_allownulls.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T21:18:27.382Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "ReplyMessage.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\ReplyMessage.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Admin\\ReplyMessage.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\ReplyMessage.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Admin\\ReplyMessage.cshtml",
+              "ViewState": "AgIAAMkAAAAAAAAAAAAtwNYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-29T20:23:38.389Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "20251129211039_removeuserid.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20251129211039_removeuserid.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Migrations\\20251129211039_removeuserid.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20251129211039_removeuserid.cs",
+              "RelativeToolTip": "SmartRecycle\\Migrations\\20251129211039_removeuserid.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T21:10:39.528Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "20251129203747_addhomepage.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20251129203747_addhomepage.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Migrations\\20251129203747_addhomepage.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20251129203747_addhomepage.cs",
+              "RelativeToolTip": "SmartRecycle\\Migrations\\20251129203747_addhomepage.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T20:37:47.435Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Admin\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\Dashboard.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Admin\\Dashboard.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-29T20:31:43.019Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "CreateRule.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\CreateRule.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Admin\\CreateRule.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\CreateRule.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Admin\\CreateRule.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-29T20:27:23.677Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "EditRule.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\EditRule.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Admin\\EditRule.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\EditRule.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Admin\\EditRule.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-29T20:28:50.19Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "CreateUser.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\CreateUser.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Admin\\CreateUser.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\CreateUser.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Admin\\CreateUser.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-29T20:29:19.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Messages.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\Messages.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Admin\\Messages.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\Messages.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Admin\\Messages.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-29T20:22:57.534Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Ratings.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\Ratings.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Admin\\Ratings.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\Ratings.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Admin\\Ratings.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-29T20:22:14.508Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Rules.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\Rules.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Admin\\Rules.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Admin\\Rules.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Admin\\Rules.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-29T20:21:21.159Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "machine-pages-unified-style.css",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\css\\machine-pages-unified-style.css",
+              "RelativeDocumentMoniker": "SmartRecycle\\wwwroot\\css\\machine-pages-unified-style.css",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\css\\machine-pages-unified-style.css",
+              "RelativeToolTip": "SmartRecycle\\wwwroot\\css\\machine-pages-unified-style.css",
+              "ViewState": "AgIAAMUCAAAAAAAAAAAYwNgCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-28T18:20:49.088Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "webgl-background-script.js",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\js\\webgl-background-script.js",
+              "RelativeDocumentMoniker": "SmartRecycle\\wwwroot\\js\\webgl-background-script.js",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\wwwroot\\js\\webgl-background-script.js",
+              "RelativeToolTip": "SmartRecycle\\wwwroot\\js\\webgl-background-script.js",
+              "ViewState": "AgIAALsAAAAAAAAAAAAowM0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-28T18:20:00.762Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "LogoutSuccess.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Machines\\LogoutSuccess.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Machines\\LogoutSuccess.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Machines\\LogoutSuccess.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Machines\\LogoutSuccess.cshtml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAowCkAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T18:11:22.517Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Error\\Index.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Error\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Error\\Index.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Error\\Index.cshtml",
+              "ViewState": "AgIAAEQCAAAAAAAAAAAowFYCAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T16:11:23.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "WebGL.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Error\\WebGL.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Error\\WebGL.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Error\\WebGL.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Error\\WebGL.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T16:10:43.454Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Lottie.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Error\\Lottie.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Error\\Lottie.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Error\\Lottie.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Error\\Lottie.cshtml",
+              "ViewState": "AgIAADsAAAAAAAAAAAAtwEUAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T16:10:56.719Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "Microsoft.CSharp.Core.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\Roslyn\\Microsoft.CSharp.Core.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\Roslyn\\Microsoft.CSharp.Core.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\Roslyn\\Microsoft.CSharp.Core.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\Roslyn\\Microsoft.CSharp.Core.targets",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAIwFMAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-11-28T16:15:57.911Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Robot.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Error\\Robot.cshtml",
+              "RelativeDocumentMoniker": "SmartRecycle\\Views\\Error\\Robot.cshtml",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Views\\Error\\Robot.cshtml",
+              "RelativeToolTip": "SmartRecycle\\Views\\Error\\Robot.cshtml",
+              "ViewState": "AgIAAC0BAAAAAAAAAAAtwDEBAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T16:10:29.805Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "20251126191634_Detection.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20251126191634_Detection.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Migrations\\20251126191634_Detection.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Migrations\\20251126191634_Detection.cs",
+              "RelativeToolTip": "SmartRecycle\\Migrations\\20251126191634_Detection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwCUAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:16:34.534Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "DetectionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Repositories\\DetectionRepository.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Repositories\\DetectionRepository.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Repositories\\DetectionRepository.cs",
+              "RelativeToolTip": "SmartRecycle\\Repositories\\DetectionRepository.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAApwFYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:11:16.103Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "IDetectionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Repositories\\IDetectionRepository.cs",
+              "RelativeDocumentMoniker": "SmartRecycle\\Repositories\\IDetectionRepository.cs",
+              "ToolTip": "C:\\Users\\Mohamed Reda\\Desktop\\SmartRecycle-w\\SmartRecycle-w\\SmartRecycle\\Repositories\\IDetectionRepository.cs",
+              "RelativeToolTip": "SmartRecycle\\Repositories\\IDetectionRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:11:02.334Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

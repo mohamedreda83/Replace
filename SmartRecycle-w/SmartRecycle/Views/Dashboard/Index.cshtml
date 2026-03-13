@@ -1,0 +1,232 @@
+﻿@model SmartRecycle.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "لوحة التحكم";
+}
+
+<div class="container py-4">
+    <!-- ترحيب بالمستخدم -->
+    <div class="card mb-4">
+        <div class="card-body bg-success text-white">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 class="mb-1">مرحباً، @Model.User.Username!</h3>
+                    <p class="mb-0">شكراً لمساهمتك في حماية البيئة 🌿</p>
+                </div>
+                <div class="col-md-4 text-md-left text-center mt-3 mt-md-0">
+                    <div class="d-inline-flex align-items-center">
+                        <span class="badge bg-light text-success p-2 rounded-pill">
+                            <i class="fas fa-medal me-1"></i>
+                            المستوى: @Model.UserLevel
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- إحصائيات المستخدم -->
+    <div class="row mb-4">
+        <!-- بطاقة النقاط -->
+        <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="display-4 text-success mb-2">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h2 class="mb-0">@Model.User.Points</h2>
+                    <p class="text-muted">إجمالي النقاط</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- بطاقة المواد المعاد تدويرها -->
+        <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="display-4 text-primary mb-2">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h2 class="mb-0">@Model.ItemsRecycled</h2>
+                    <p class="text-muted">العناصر المعاد تدويرها</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- بطاقة المستوى -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="display-4 text-warning mb-2">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h2 class="mb-0">@Model.UserLevel</h2>
+                    <p class="text-muted">المستوى الحالي</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- سجل إعادة التدوير -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">سجل إعادة التدوير</h5>
+        </div>
+        <div class="card-body p-0">
+            @if (Model.RecyclingLogs.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>نوع العنصر</th>
+                                <th>التاريخ والوقت</th>
+                                <th>النقاط المكتسبة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var log in Model.RecyclingLogs)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            @if (log.BottleType.ToLower() == ("Plastic").ToLower())
+                                            {
+                                                <i class="fas fa-wine-bottle text-primary me-2"></i>
+                                                <span>زجاجة </span>
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-flask text-success me-2"></i>
+                                                <span>كانز</span>
+                                            }
+                                        </div>
+                                    </td>
+                                    <td>@log.Timestamp.ToString("yyyy/MM/dd - HH:mm")</td>
+                                    <td>
+                                        <span class="badge bg-success">+@log.PointsAwarded</span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <div class="display-4 text-muted mb-3">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <p class="text-muted">لا توجد أنشطة إعادة تدوير بعد. ابدأ في إعادة التدوير لرؤية سجلك!</p>
+                    <p  class="btn btn-success mt-2">
+                        <i class="fas fa-trash-restore me-1"></i>
+                        ابدأ بإعادة التدوير عن طريق الماكينة
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- معلومات مستويات المستخدم -->
+    <div class="card border-0 shadow-sm mt-4">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">المستويات ومزاياها</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <span class="badge bg-secondary rounded-circle p-2">
+                                <i class="fas fa-seedling fa-lg"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-0">مبتدئ</h6>
+                            <small class="text-muted">0 - 500 نقطة</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <span class="badge bg-primary rounded-circle p-2">
+                                <i class="fas fa-tree fa-lg"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-0">متوسط</h6>
+                            <small class="text-muted">501 - 1500 نقطة</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <span class="badge bg-warning rounded-circle p-2">
+                                <i class="fas fa-star fa-lg"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-0">متقدم</h6>
+                            <small class="text-muted">1501 - 3000 نقطة</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <span class="badge bg-success rounded-circle p-2">
+                                <i class="fas fa-leaf fa-lg"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-0">خبير</h6>
+                            <small class="text-muted">3001 - 5000 نقطة</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <span class="badge bg-info rounded-circle p-2">
+                                <i class="fas fa-globe-americas fa-lg"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-0">بطل البيئة</h6>
+                            <small class="text-muted">5001 - 10000 نقطة</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <span class="badge bg-danger rounded-circle p-2">
+                                <i class="fas fa-crown fa-lg"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-0">أسطورة</h6>
+                            <small class="text-muted">+10000 نقطة</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // يمكن إضافة سكربتات خاصة بصفحة لوحة التحكم هنا
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Dashboard page loaded successfully');
+        });
+    </script>
+}

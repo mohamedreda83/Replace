@@ -1,0 +1,99 @@
+﻿@{
+    
+    ViewData["Title"] = "Login";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Recycling - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/login.css">
+</head>
+<body>
+    @{
+        bool isRtl = false;
+        try
+        {
+            isRtl = System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
+        }
+        catch { }
+    }
+    <div dir="@(isRtl ? "rtl" : "ltr")" class="login-container">
+        <div class="row g-0 h-100">
+            <!-- Login Form Section -->
+            <div class="col-lg-5 d-flex align-items-center justify-content-center">
+                <div class="login-form">
+                    <div class="form-heading">
+                        <img src="~/Images/black-recycle-icon-png-2.png" alt="Logo" class="app-logo">
+                        <h3 class="mt-4">Smart Recycling</h3>
+                        <p class="text-muted">Login to your account</p>
+                    </div>
+
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="input-group mb-3">
+                            <i class="fas fa-user"></i>
+                            @Html.TextBox("Username", "", new { @class = "form-control", placeholder = "Username", required = "required" })
+                            <div class="invalid-feedback">
+                                Please enter your username.
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-4">
+                            <i class="fas fa-lock"></i>
+                            @Html.Password("Password", "", new { @class = "form-control", placeholder = "Password", required = "required" })
+                            <div class="invalid-feedback">
+                                Please enter your password.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mb-3">Login</button>
+
+                        <div class="text-center mt-3">
+                            <span class="text-muted">Don't have an account? </span>
+                            <a href="@Url.Action("Register", "Account")" class="register-link">Register</a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Background Image/Graphics Section -->
+            <div class="col-lg-7 d-none d-lg-block">
+                <div class="sidebar">
+                    <div class="illustration-container">
+                        @* <img src="~/Images/recycling-illustration.png" alt="Recycling Illustration" class="illustration"> *@
+                        <img src="~/Images/ChatGPT.png" alt="Recycling Illustration" class="illustration">
+                    </div>
+                    <div class="sidebar-text">
+                        <h2>Make an Impact</h2>
+                        <p>Join our community and track your recycling achievements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+        (function() {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+</body>
+</html>

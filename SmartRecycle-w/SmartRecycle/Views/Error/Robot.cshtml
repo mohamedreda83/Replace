@@ -1,0 +1,513 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خطأ @ViewBag.ErrorCode</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .error-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            padding: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @@keyframes fadeInUp {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        .error-code {
+            font-size: 180px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00f2fe, #4facfe, #00f2fe);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            text-shadow: 0 0 60px rgba(0, 242, 254, 0.4);
+            margin-bottom: 20px;
+        }
+
+        @@keyframes gradientShift {
+            0%, 100%
+
+        {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        }
+
+        .robot-container {
+            margin: 40px auto;
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+
+        .robot {
+            width: 100%;
+            height: 100%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @@keyframes float {
+            0%, 100%
+
+        {
+            transform: translateY(0px) rotate(0deg);
+        }
+
+        50% {
+            transform: translateY(-20px) rotate(5deg);
+        }
+
+        }
+
+        .robot-head {
+            width: 120px;
+            height: 100px;
+            background: linear-gradient(145deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin: 0 auto 10px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+            animation: headGlow 2s ease-in-out infinite;
+        }
+
+        @@keyframes headGlow {
+            0%, 100%
+
+        {
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        50% {
+            box-shadow: 0 10px 60px rgba(102, 126, 234, 0.8);
+        }
+
+        }
+
+        .robot-antenna {
+            width: 4px;
+            height: 30px;
+            background: #4facfe;
+            margin: 0 auto;
+            border-radius: 2px;
+            position: relative;
+        }
+
+            .robot-antenna::after {
+                content: '';
+                position: absolute;
+                top: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 12px;
+                height: 12px;
+                background: #00f2fe;
+                border-radius: 50%;
+                box-shadow: 0 0 20px #00f2fe;
+                animation: pulse 1.5s ease-in-out infinite;
+            }
+
+        @@keyframes pulse {
+            0%, 100%
+
+        {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: translateX(-50%) scale(1.3);
+            opacity: 0.7;
+        }
+
+        }
+
+        .robot-eyes {
+            display: flex;
+            justify-content: space-around;
+            padding: 25px 20px;
+        }
+
+        .eye {
+            width: 25px;
+            height: 25px;
+            background: #00f2fe;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #00f2fe, inset 0 0 10px rgba(0, 0, 0, 0.3);
+            animation: blink 4s ease-in-out infinite;
+        }
+
+        @@keyframes blink {
+            0%, 90%, 100%
+
+        {
+            transform: scaleY(1);
+        }
+
+        95% {
+            transform: scaleY(0.1);
+        }
+
+        }
+
+        .robot-mouth {
+            width: 60px;
+            height: 30px;
+            border: 3px solid #00f2fe;
+            border-top: none;
+            border-radius: 0 0 30px 30px;
+            margin: 10px auto;
+            animation: talk 2s ease-in-out infinite;
+        }
+
+        @@keyframes talk {
+            0%, 100%
+
+        {
+            height: 30px;
+        }
+
+        50% {
+            height: 20px;
+        }
+
+        }
+
+        .robot-body {
+            width: 140px;
+            height: 80px;
+            background: linear-gradient(145deg, #764ba2 0%, #667eea 100%);
+            border-radius: 15px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(118, 75, 162, 0.4);
+        }
+
+            .robot-body::before,
+            .robot-body::after {
+                content: '';
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                background: #00f2fe;
+                border-radius: 50%;
+                top: 50%;
+                transform: translateY(-50%);
+                box-shadow: 0 0 15px #00f2fe;
+            }
+
+            .robot-body::before {
+                left: 15px;
+            }
+
+            .robot-body::after {
+                right: 15px;
+            }
+
+        .robot-arms {
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+            margin: -40px auto 0;
+            position: relative;
+        }
+
+        .arm {
+            width: 15px;
+            height: 60px;
+            background: linear-gradient(145deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            animation: wave 2s ease-in-out infinite;
+        }
+
+            .arm:first-child {
+                animation-delay: 0.5s;
+            }
+
+        @@keyframes wave {
+            0%, 100%
+
+        {
+            transform: rotate(0deg);
+        }
+
+        50% {
+            transform: rotate(-15deg);
+        }
+
+        }
+
+        .error-message {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 30px 0 15px;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-description {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .speech-bubble {
+            position: relative;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px 35px;
+            margin: 30px auto;
+            max-width: 600px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: bubbleAppear 1s ease-out 0.5s both;
+        }
+
+        @@keyframes bubbleAppear {
+            from
+
+        {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .ai-message {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .technical-details {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: left;
+            direction: ltr;
+        }
+
+        .btn-container {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            color: #1e3c72;
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.4);
+        }
+
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 40px rgba(0, 242, 254, 0.6);
+            }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+            .btn-secondary:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-3px);
+            }
+
+        @@media (max-width: 768px) {
+            .error-code
+
+        {
+            font-size: 120px;
+        }
+
+        .error-message {
+            font-size: 24px;
+        }
+
+        .error-description {
+            font-size: 16px;
+        }
+
+        .robot-container {
+            width: 150px;
+            height: 150px;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            font-size: 16px;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="error-container">
+        <div class="error-code">@ViewBag.ErrorCode</div>
+
+        <div class="robot-container">
+            <div class="robot">
+                <div class="robot-antenna"></div>
+                <div class="robot-head">
+                    <div class="robot-eyes">
+                        <div class="eye"></div>
+                        <div class="eye"></div>
+                    </div>
+                    <div class="robot-mouth"></div>
+                </div>
+                <div class="robot-body"></div>
+                <div class="robot-arms">
+                    <div class="arm"></div>
+                    <div class="arm"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="speech-bubble">
+            <div class="ai-message">🤖 عفواً! حدث خطأ غير متوقع</div>
+            <div class="error-description">@ViewBag.ErrorMessage</div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.ErrorPath as string))
+            {
+                <div class="technical-details">
+                    <strong>Path:</strong> @ViewBag.ErrorPath<br>
+                    <strong>Status:</strong> @ViewBag.ErrorCode
+                </div>
+            }
+        </div>
+
+        <div class="btn-container">
+            <a href="/" class="btn btn-primary">العودة للرئيسية</a>
+            <button onclick="history.back()" class="btn btn-secondary">رجوع</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00f2fe' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#4facfe',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,599 @@
+﻿@{
+    ViewData["Title"] = $"خطأ {ViewBag.ErrorCode}";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خطأ @ViewBag.ErrorCode</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Custom Scrollbar - جامد جداً */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a2e1a;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #2ecc71 0%, #27ae60 100%);
+            border-radius: 10px;
+            border: 2px solid #0a2e1a;
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #27ae60 0%, #229954 100%);
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.8);
+        }
+
+        /* Firefox Scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #2ecc71 #0a2e1a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a2e1a 0%, #1a5c3a 50%, #2d8659 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content-overlay {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .glitch-container {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .error-code-3d {
+            font-size: 180px;
+            font-weight: 900;
+            color: #2ecc71;
+            text-shadow: 0 0 10px #2ecc71, 0 0 20px #2ecc71, 0 0 40px #2ecc71, 0 0 80px rgba(46, 204, 113, 0.5);
+            animation: glitchAnimation 3s infinite;
+            position: relative;
+        }
+
+        @@keyframes glitchAnimation {
+            0%, 100% {
+                transform: translate(0);
+                text-shadow: 0 0 10px #2ecc71, 0 0 20px #2ecc71, 0 0 40px #2ecc71;
+            }
+
+            20% {
+                transform: translate(-5px, 5px);
+                text-shadow: 5px -5px 0 #ffffff, -5px 5px 0 #2ecc71;
+            }
+
+            40% {
+                transform: translate(-5px, -5px);
+                text-shadow: -5px 5px 0 #ffffff, 5px -5px 0 #2ecc71;
+            }
+
+            60% {
+                transform: translate(5px, 5px);
+                text-shadow: -5px -5px 0 #ffffff, 5px 5px 0 #2ecc71;
+            }
+
+            80% {
+                transform: translate(5px, -5px);
+                text-shadow: 5px 5px 0 #ffffff, -5px -5px 0 #2ecc71;
+            }
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px 60px;
+            border: 2px solid rgba(46, 204, 113, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(10, 46, 26, 0.5), 
+                        inset 0 0 50px rgba(46, 204, 113, 0.1),
+                        0 0 100px rgba(46, 204, 113, 0.2);
+            max-width: 800px;
+            text-align: center;
+            animation: floatPanel 3s ease-in-out infinite;
+            margin-bottom: 40px;
+        }
+
+        @@keyframes floatPanel {
+            0%, 100% {
+                transform: translateY(0px);
+                box-shadow: 0 8px 32px 0 rgba(10, 46, 26, 0.5), 
+                            inset 0 0 50px rgba(46, 204, 113, 0.1),
+                            0 0 100px rgba(46, 204, 113, 0.2);
+            }
+
+            50% {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 40px 0 rgba(10, 46, 26, 0.7), 
+                            inset 0 0 50px rgba(46, 204, 113, 0.15),
+                            0 0 120px rgba(46, 204, 113, 0.3);
+            }
+        }
+
+        .error-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #2ecc71, #ffffff, #2ecc71);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 3s ease infinite;
+        }
+
+        @@keyframes gradientFlow {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .error-message {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .tech-details {
+            background: rgba(10, 46, 26, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 4px solid #2ecc71;
+            text-align: left;
+            direction: ltr;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #a8e6cf;
+        }
+
+        .tech-details strong {
+            color: #2ecc71;
+        }
+
+        .hologram-text {
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+            padding: 15px 30px;
+            border: 2px solid #2ecc71;
+            border-radius: 10px;
+            color: #2ecc71;
+            font-size: 16px;
+            animation: hologramFlicker 2s ease-in-out infinite;
+            background: rgba(46, 204, 113, 0.05);
+        }
+
+        @@keyframes hologramFlicker {
+            0%, 100% {
+                opacity: 1;
+                border-color: #2ecc71;
+                box-shadow: 0 0 20px rgba(46, 204, 113, 0.4);
+            }
+
+            50% {
+                opacity: 0.8;
+                border-color: #27ae60;
+                box-shadow: 0 0 30px rgba(46, 204, 113, 0.6);
+            }
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 35px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-3d {
+            padding: 18px 45px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .btn-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-3d:hover::before {
+            left: 100%;
+        }
+
+        .btn-home {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.4), 
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-5px) rotateX(10deg);
+            box-shadow: 0 15px 40px rgba(46, 204, 113, 0.6), 
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(46, 204, 113, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #2ecc71;
+            transform: translateY(-5px) rotateX(10deg);
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.3);
+        }
+
+        .scan-line {
+            position: fixed;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #2ecc71, transparent);
+            box-shadow: 0 0 20px #2ecc71, 0 0 40px rgba(46, 204, 113, 0.5);
+            animation: scan 4s linear infinite;
+            z-index: 5;
+        }
+
+        @@keyframes scan {
+            0% {
+                top: 0%;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
+        /* Extra Content for Scrolling Demo */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 15;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-arrow {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #2ecc71;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2ecc71;
+            font-size: 24px;
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+            background: rgba(10, 46, 26, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        @@keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .additional-info {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px 50px;
+            border: 2px solid rgba(46, 204, 113, 0.3);
+            max-width: 800px;
+            margin: 40px auto;
+            color: white;
+        }
+
+        .info-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2ecc71;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: rgba(46, 204, 113, 0.1);
+            border-right: 4px solid #2ecc71;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .info-list li:hover {
+            background: rgba(46, 204, 113, 0.2);
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        @@media (max-width: 768px) {
+            .error-code-3d {
+                font-size: 100px;
+            }
+
+            .glass-panel {
+                padding: 30px 25px;
+            }
+
+            .error-title {
+                font-size: 28px;
+            }
+
+            .error-message {
+                font-size: 16px;
+            }
+
+            .btn-3d {
+                padding: 15px 35px;
+                font-size: 16px;
+            }
+
+            .additional-info {
+                padding: 30px 25px;
+            }
+
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scan-line"></div>
+    <div id="canvas-container"></div>
+
+    <div class="scroll-indicator">
+        <div class="scroll-arrow">↓</div>
+    </div>
+
+    <div class="content-overlay">
+        <div class="glitch-container">
+            <div class="error-code-3d">@ViewBag.ErrorCode</div>
+        </div>
+
+        <div class="glass-panel">
+            <div class="error-title">⚠️ حدث خطأ في النظام</div>
+            <div class="error-message">@ViewBag.ErrorMessage</div>
+
+            <div class="hologram-text">
+                🔍 جاري فحص النظام...
+            </div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.ErrorPath as string))
+            {
+                <div class="tech-details">
+                    <strong>ERROR DETAILS:</strong><br>
+                    Path: @ViewBag.ErrorPath<br>
+                    Status Code: @ViewBag.ErrorCode<br>
+                    Timestamp: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                </div>
+            }
+
+            <div class="btn-group">
+                <a href="/" class="btn-3d btn-home">العودة للرئيسية</a>
+                <button onclick="history.back()" class="btn-3d btn-back">رجوع</button>
+            </div>
+        </div>
+
+        @* <!-- Additional Info Section for Scroll -->
+        <div class="additional-info">
+            <h2 class="info-title">📋 معلومات إضافية</h2>
+            <ul class="info-list">
+                <li>✅ تم تسجيل الخطأ تلقائياً في سجل النظام</li>
+                <li>🔔 تم إخطار فريق الدعم الفني</li>
+                <li>⏱️ متوسط وقت الاستجابة: 15 دقيقة</li>
+                <li>📞 للاستفسارات العاجلة: تواصل معنا مباشرة</li>
+                <li>💡 نصيحة: حاول تحديث الصفحة أو مسح الكاش</li>
+            </ul>
+        </div> *@
+
+        <div class="additional-info">
+            <h2 class="info-title">🛠️ خطوات حل المشكلة</h2>
+            <ul class="info-list">
+                <li>1️⃣ تحقق من اتصالك بالإنترنت</li>
+                <li>2️⃣ قم بتحديث الصفحة (F5 أو Ctrl+R)</li>
+                <li>3️⃣ امسح ذاكرة التخزين المؤقت (Cache)</li>
+                <li>4️⃣ حاول استخدام متصفح آخر</li>
+                <li>5️⃣ إذا استمرت المشكلة، تواصل مع الدعم الفني</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Three.js Scene Setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Create floating geometric shapes with green theme
+        const geometry = new THREE.IcosahedronGeometry(1, 0);
+        const material = new THREE.MeshPhongMaterial({
+            color: 0x2ecc71,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.6
+        });
+
+        const shapes = [];
+        for (let i = 0; i < 15; i++) {
+            const mesh = new THREE.Mesh(geometry, material.clone());
+            mesh.position.x = (Math.random() - 0.5) * 30;
+            mesh.position.y = (Math.random() - 0.5) * 30;
+            mesh.position.z = (Math.random() - 0.5) * 30;
+            mesh.scale.setScalar(Math.random() * 2 + 0.5);
+            scene.add(mesh);
+            shapes.push({
+                mesh: mesh,
+                rotationSpeed: {
+                    x: (Math.random() - 0.5) * 0.02,
+                    y: (Math.random() - 0.5) * 0.02
+                }
+            });
+        }
+
+        // Lighting with green theme
+        const light1 = new THREE.PointLight(0x2ecc71, 2, 100);
+        light1.position.set(10, 10, 10);
+        scene.add(light1);
+
+        const light2 = new THREE.PointLight(0x27ae60, 2, 100);
+        light2.position.set(-10, -10, -10);
+        scene.add(light2);
+
+        const light3 = new THREE.PointLight(0xffffff, 1, 100);
+        light3.position.set(0, 15, 0);
+        scene.add(light3);
+
+        const ambientLight = new THREE.AmbientLight(0x1a5c3a);
+        scene.add(ambientLight);
+
+        camera.position.z = 15;
+
+        // Mouse interaction
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        // Hide scroll indicator when scrolling
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            document.querySelector('.scroll-indicator').style.opacity = '0';
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                if (window.scrollY < 100) {
+                    document.querySelector('.scroll-indicator').style.opacity = '1';
+                }
+            }, 1000);
+        });
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate and animate shapes
+            shapes.forEach(shape => {
+                shape.mesh.rotation.x += shape.rotationSpeed.x;
+                shape.mesh.rotation.y += shape.rotationSpeed.y;
+
+                // Subtle floating animation
+                shape.mesh.position.y += Math.sin(Date.now() * 0.001 + shape.mesh.position.x) * 0.01;
+            });
+
+            // Camera follows mouse slightly
+            camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
+            camera.position.y += (mouseY * 2 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            // Light animation
+            light1.position.x = Math.sin(Date.now() * 0.001) * 10;
+            light1.position.y = Math.cos(Date.now() * 0.001) * 10;
+
+            light2.position.x = Math.cos(Date.now() * 0.0015) * 10;
+            light2.position.y = Math.sin(Date.now() * 0.0015) * 10;
+
+            light3.position.z = Math.sin(Date.now() * 0.0008) * 12;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

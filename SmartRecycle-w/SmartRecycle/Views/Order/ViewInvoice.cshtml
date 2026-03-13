@@ -1,0 +1,111 @@
+﻿@model SmartRecycle.Models.Invoice
+
+@{
+    ViewData["Title"] = "عرض الفاتورة";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">فاتورة رقم @Model.InvoiceNumber</h3>
+                    <div class="card-tools">
+                        <a asp-action="DownloadInvoice" asp-route-id="@Model.Id"
+                           class="btn btn-primary btn-sm">
+                            <i class="fas fa-download"></i> تحميل PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="invoice">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>
+                                    RePlace
+                                    <small class="float-right">تاريخ الإنشاء: @Model.CreatedDate.ToString("yyyy/MM/dd")</small>
+                                </h4>
+                            </div>
+                        </div>
+
+                        <div class="row invoice-info">
+                            <div class="col-sm-4 invoice-col">
+                                <strong>معلومات العميل</strong>
+                                <address>
+                                    <strong>@Model.User.Username</strong><br>
+                                    البريد: @Model.User.Gmail<br>
+                                    الهاتف: @Model.User.Phone
+                                </address>
+                            </div>
+                            <div class="col-sm-4 invoice-col">
+                                <strong>معلومات الطلب</strong>
+                                <address>
+                                    <strong>رقم الطلب:</strong> @Model.OrderId<br>
+                                    <strong>تاريخ الطلب:</strong> @Model.Order.OrderDate.ToString("yyyy/MM/dd")<br>
+                                    <strong>الفرع:</strong> @Model.Order.SelectedBranch
+                                </address>
+                            </div>
+                            <div class="col-sm-4 invoice-col">
+                                <strong>رقم الفاتورة:</strong> @Model.InvoiceNumber<br>
+                                <strong>إجمالي النقاط:</strong> @Model.TotalPoints
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>المنتج</th>
+                                            <th>الكمية</th>
+                                            <th>النقاط لكل قطعة</th>
+                                            <th>إجمالي النقاط</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Order.OrderItems)
+                                        {
+                                            <tr>
+                                                <td>@item.Product.Name</td>
+                                                <td>@item.Quantity</td>
+                                                <td>@item.PointsPerItem</td>
+                                                <td>@(item.Quantity * item .PointsPerItem)</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                            </div>
+                            <div class="col-6">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width:50%">إجمالي النقاط:</th>
+                                            <td>@Model.TotalPoints</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row no-print">
+                        <div class="col-12">
+                            <a asp-action="MyInvoices" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> العودة للفواتير
+                            </a>
+                            <a asp-action="DownloadInvoice" asp-route-id="@Model.Id"
+                               class="btn btn-primary float-right">
+                                <i class="fas fa-download"></i> تحميل PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

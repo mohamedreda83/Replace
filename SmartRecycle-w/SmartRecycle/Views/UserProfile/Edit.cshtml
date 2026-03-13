@@ -1,0 +1,101 @@
+﻿@model SmartRecycle.ViewModels.UserProfileViewModel
+@{
+    ViewData["Title"] = "تعديل الملف الشخصي";
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">تعديل الملف الشخصي</h3>
+                </div>
+                <div class="card-body">
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="mb-4">
+                            <label asp-for="Username" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                                <input asp-for="Username" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                        <div class="mb-4">
+                            <label asp-for="NewPassword" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                <input asp-for="NewPassword" type="password" class="form-control" placeholder="اترك فارغاً إذا لم ترغب في تغيير كلمة المرور" />
+                            </div>
+                            <span asp-validation-for="NewPassword" class="text-danger"></span>
+                        </div>
+                        <div class="mb-4">
+                            <label asp-for="ConfirmPassword" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                            </div>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="mb-4">
+                            <label asp-for="Points" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-star-fill"></i></span>
+                                <input asp-for="Points" class="form-control" readonly />
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save me-2"></i> حفظ التغييرات
+                            </button>
+                            <a href="javascript:history.back()" class="btn btn-secondary">
+                                <i class="bi bi-arrow-right me-2"></i> رجوع
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        
+        $(document).ready(function() {
+            var usernameField = $('input[name="Username"]');
+            @{
+            var gmailSuffix = "@gmail.com";
+
+            }
+            var username = usernameField.val();
+            if (username && username.toLowerCase().endsWith(gmailSuffix)) {
+                usernameField.val(username.substring(0, username.length - gmailSuffix.length));
+            }
+
+           
+            usernameField.on('input change blur', function() {
+                var value = $(this).val();
+                if (value && value.toLowerCase().endsWith(gmailSuffix)) {
+                    $(this).val(value.substring(0, value.length - gmailSuffix.length));
+                }
+            });
+
+       
+            $('form').on('submit', function() {
+                var value = usernameField.val();
+                if (value && value.toLowerCase().endsWith(gmailSuffix)) {
+                    usernameField.val(value.substring(0, value.length - gmailSuffix.length));
+                }
+                return true;
+            });
+        });
+    </script>
+}

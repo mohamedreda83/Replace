@@ -1,0 +1,225 @@
+﻿@model List<SmartRecycle.Models.Rating>
+@{
+    ViewData["Title"] = "إدارة التقييمات";
+}
+
+<style>
+    .filter-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #eee;
+    }
+
+    .filter-tab {
+        padding: 12px 25px;
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #666;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+        .filter-tab:hover {
+            color: var(--primary-green);
+        }
+
+        .filter-tab.active {
+            color: var(--primary-green);
+            border-bottom-color: var(--primary-green);
+        }
+
+    .ratings-grid {
+        display: grid;
+        gap: 20px;
+    }
+
+    .rating-card {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+        .rating-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+    .rating-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 15px;
+    }
+
+    .stars {
+        font-size: 1.5rem;
+        color: #FFD700;
+    }
+
+    .rating-date {
+        color: #999;
+        font-size: 0.9rem;
+    }
+
+    .rating-comment {
+        color: #333;
+        line-height: 1.6;
+        margin: 15px 0;
+        padding: 15px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        border-right: 4px solid var(--primary-green);
+    }
+
+    .rating-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .stats-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+        color: white;
+        padding: 25px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    .stat-label {
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+</style>
+
+<div class="admin-container">
+    <div class="page-header">
+        <h2>⭐ إدارة التقييمات</h2>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <div class="stats-cards">
+        <div class="stat-card">
+            <div class="stat-label">إجمالي التقييمات</div>
+            <div class="stat-value">@Model.Count</div>
+        </div>
+        <div class="stat-card" style="background: linear-gradient(135deg, #FF9800, #FFB74D);">
+            <div class="stat-label">في انتظار الموافقة</div>
+            <div class="stat-value">@Model.Count(r => !r.IsApproved)</div>
+        </div>
+        <div class="stat-card" style="background: linear-gradient(135deg, #2196F3, #64B5F6);">
+            <div class="stat-label">المتوسط</div>
+            <div class="stat-value">@(Model.Any(r => r.IsApproved) ? Model.Where(r => r.IsApproved).Average(r => r.RatingValue).ToString("F1") : "0.0")</div>
+        </div>
+    </div>
+
+    <div class="filter-tabs">
+        <a href="@Url.Action("Ratings", new { filter = "all" })"
+           class="filter-tab @(ViewBag.Filter == "all" ? "active" : "")">
+            الكل (@Model.Count)
+        </a>
+        <a href="@Url.Action("Ratings", new { filter = "pending" })"
+           class="filter-tab @(ViewBag.Filter == "pending" ? "active" : "")">
+            قيد المراجعة (@Model.Count(r => !r.IsApproved))
+        </a>
+        <a href="@Url.Action("Ratings", new { filter = "approved" })"
+           class="filter-tab @(ViewBag.Filter == "approved" ? "active" : "")">
+            المعتمدة (@Model.Count(r => r.IsApproved))
+        </a>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="ratings-grid">
+            @foreach (var rating in Model)
+            {
+                <div class="rating-card">
+                    <div class="rating-header">
+                        <div>
+                            <div class="stars">
+                                @for (int i = 0; i < rating.RatingValue; i++)
+                                {
+                                    <span>★</span>
+                                }
+                                @for (int i = rating.RatingValue; i < 5; i++)
+                                {
+                                    <span style="color: #ddd;">★</span>
+                                }
+                            </div>
+                            <div class="rating-date">@rating.CreatedAt.ToString("dd/MM/yyyy hh:mm tt")</div>
+                        </div>
+                        <div>
+                            @if (rating.IsApproved)
+                            {
+                                <span class="badge badge-active">✓ معتمد</span>
+                            }
+                            else
+                            {
+                                <span class="badge" style="background: #FF9800; color: white;">⏳ قيد المراجعة</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="rating-comment">
+                        @rating.Comment
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(rating.UserId))
+                    {
+                        <div style="color: #999; font-size: 0.9rem; margin-top: 10px;">
+                            👤 User ID: @rating.UserId.Substring(0, Math.Min(8, rating.UserId.Length))...
+                        </div>
+                    }
+
+                    <div class="rating-actions">
+                        @if (!rating.IsApproved)
+                        {
+                            <form asp-action="ApproveRating" asp-route-id="@rating.Id" method="post" style="display: inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn-sm" style="background: #4CAF50; color: white;">
+                                    ✓ الموافقة
+                                </button>
+                            </form>
+                        }
+                        <form asp-action="DeleteRating" asp-route-id="@rating.Id" method="post" style="display: inline;"
+                              onsubmit="return confirm('هل أنت متأكد من حذف هذا التقييم؟')">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn-sm btn-delete">🗑️ حذف</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <i>⭐</i>
+            <h3>لا توجد تقييمات</h3>
+            <p>لم يقم أي مستخدم بإضافة تقييم بعد</p>
+        </div>
+    }
+</div>

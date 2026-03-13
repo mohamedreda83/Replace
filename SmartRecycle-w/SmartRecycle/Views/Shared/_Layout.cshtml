@@ -1,0 +1,480 @@
+﻿@{
+    ViewData["Title"] = ViewData["Title"] ?? "RePlace";
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RePlace</title>
+
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts - Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <!-- Overlay للسايدبار -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-header">
+            <a class="sidebar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-recycle"></i>
+                <span>RePlace</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="sidebar-user-info">
+                <div class="sidebar-user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="sidebar-user-details">
+                    <div class="sidebar-user-name">@User.Identity.Name</div>
+                    <div class="sidebar-user-points">
+                        <i class="fas fa-star"></i>
+                        <span id="sidebarPointsDisplay">@User.FindFirst("Point")?.Value</span>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <ul class="sidebar-nav">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="sidebar-nav-item">
+                    <a class="sidebar-nav-link" asp-area="" asp-controller="Shop" asp-action="Index">
+                        <i class="fas fa-store"></i>
+                        <span>المتجر</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a class="sidebar-nav-link" asp-area="" asp-controller="Shop" asp-action="Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>سلة المشتريات</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <button class="sidebar-dropdown-toggle" data-dropdown="ordersDropdown">
+                        <span>
+                            <i class="fas fa-clipboard-list"></i>
+                            طلباتي
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="sidebar-dropdown" id="ordersDropdown">
+                        <li>
+                            <a class="sidebar-dropdown-item" asp-area="" asp-controller="Order" asp-action="Index">
+                                <i class="fas fa-box"></i> طلباتي السابقة
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-dropdown-item" asp-area="" asp-controller="Order" asp-action="MyInvoices">
+                                <i class="fas fa-file-invoice"></i> فواتيري
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a class="sidebar-nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index">
+                        <i class="fas fa-user-circle"></i>
+                        <span>الملف الشخصي</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a class="sidebar-nav-link" asp-area="" asp-controller="UserProfile" asp-action="Edit">
+                        <i class="fas fa-edit"></i>
+                        <span>تعديل الملف الشخصي</span>
+                    </a>
+                </li>
+            }
+
+            <li class="sidebar-nav-item">
+                <a class="sidebar-nav-link" asp-area="" asp-controller="Account" asp-action="Download">
+                    <i class="fas fa-download"></i>
+                    <span>تنزيل APK</span>
+                </a>
+            </li>
+
+            @if (User.IsInRole("admin"))
+            {
+                <div class="sidebar-divider"></div>
+                <li class="sidebar-nav-item">
+                    <button class="sidebar-dropdown-toggle" data-dropdown="adminDropdown">
+                        <span>
+                            <i class="fas fa-cogs"></i>
+                            لوحة الإدارة
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="sidebar-dropdown" id="adminDropdown">
+                        <li>
+                            <a class="sidebar-dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">
+                                <i class="fas fa-box"></i> إدارة المنتجات
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-dropdown-item" asp-area="" asp-controller="Categories" asp-action="Index">
+                                <i class="fas fa-tags"></i> إدارة الفئات
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-dropdown-item" asp-area="" asp-controller="Orders" asp-action="Index">
+                                <i class="fas fa-shipping-fast"></i> إدارة الطلبات
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-dropdown-item" asp-area="" asp-controller="Orders" asp-action="SearchOrder">
+                                <i class="fas fa-search"></i> تسليم طلبات
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-dropdown-item" asp-area="" asp-controller="Orders" asp-action="BranchOrders">
+                                <i class="fas fa-building"></i> مشاهدة طلبات الفرع
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-dropdown-item" asp-area="" asp-controller="Admin" asp-action="Index">
+                                <i class="fas fa-users-cog"></i> إدارة المستخدمين
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="sidebar-divider"></div>
+                <li class="sidebar-nav-item">
+                    <form id="sidebarLogoutForm" method="post" action="@Url.Action("Logout", "Account")">
+                        @Html.AntiForgeryToken()
+                        <a class="sidebar-nav-link" href="javascript:document.getElementById('sidebarLogoutForm').submit()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>تسجيل خروج</span>
+                        </a>
+                    </form>
+                </li>
+            }
+            else
+            {
+                <div class="sidebar-divider"></div>
+                <li class="sidebar-nav-item">
+                    <a class="sidebar-nav-link" asp-area="" asp-controller="Account" asp-action="Login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>تسجيل دخول</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a class="sidebar-nav-link" asp-area="" asp-controller="Account" asp-action="Register">
+                        <i class="fas fa-user-plus"></i>
+                        <span>إنشاء حساب</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-recycle fa-lg"></i>
+                    <span class="ms-2">RePlace</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Shop" asp-action="Index">
+                                    <i class="fas fa-store"></i>
+                                    <span>المتجر</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Shop" asp-action="Cart">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span>سلة المشتريات</span>
+                                </a>
+                            </li>
+
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>طلباتي</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Order" asp-action="Index">
+                                            <i class="fas fa-box"></i> طلباتي السابقة
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Order" asp-action="MyInvoices">
+                                            <i class="fas fa-box"></i>فواتيري
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index">
+                                    <i class="fas fa-user-circle"></i>
+                                    <span>الملف الشخصي</span>
+                                </a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Download">
+                                <i class="fas fa-download"></i>
+                                <span>تنزيل APK</span>
+                            </a>
+                        </li>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>لوحة الإدارة</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">
+                                            <i class="fas fa-box"></i> إدارة المنتجات
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Categories" asp-action="Index">
+                                            <i class="fas fa-tags"></i> إدارة الفئات
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Orders" asp-action="Index">
+                                            <i class="fas fa-shipping-fast"></i> إدارة الطلبات
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Orders" asp-action="SearchOrder">
+                                            <i class="fas fa-shipping-fast"></i> تسليم طلبات
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Orders" asp-action="BranchOrders">
+                                            <i class="fas fa-shipping-fast"></i> مشاهدة طلبات الفرع
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Index">
+                                            <i class="fas fa-users-cog"></i> إدارة المستخدمين
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                    <div class="d-flex align-items-center">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="user-points me-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <span id="userPointsDisplay" class="fw-bold">
+                                    @User.FindFirst("Point")?.Value
+                                </span>
+                            </div>
+                            <div class="dropdown">
+                                <a class="btn btn-light user-profile d-flex align-items-center" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="user-avatar me-2">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <span>
+                                        @User.Identity.Name
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Dashboard" asp-action="Index">
+                                            <i class="fas fa-user-circle"></i> الملف الشخصي
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="UserProfile" asp-action="Edit">
+                                            <i class="fas fa-edit"></i> تعديل الملف الشخصي
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Order" asp-action="Index">
+                                            <i class="fas fa-clipboard-list"></i> طلباتي
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="Cart">
+                                            <i class="fas fa-shopping-cart"></i> سلة المشتريات
+                                        </a>
+                                    </li>
+                                    @if (User.IsInRole("admin"))
+                                    {
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">
+                                                <i class="fas fa-box"></i> إدارة المنتجات
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Categories" asp-action="Index">
+                                                <i class="fas fa-tags"></i> إدارة الفئات
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Orders" asp-action="Index">
+                                                <i class="fas fa-shipping-fast"></i> إدارة الطلبات
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Index">
+                                                <i class="fas fa-users-cog"></i> إدارة المستخدمين
+                                            </a>
+                                        </li>
+                                    }
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form id="logoutForm" method="post" action="@Url.Action("Logout", "Account")">
+                                            @Html.AntiForgeryToken()
+                                            <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">
+                                                <i class="fas fa-sign-out-alt"></i> تسجيل خروج
+                                            </a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <a class="btn btn-outline-light me-2" asp-area="" asp-controller="Account" asp-action="Login">
+                                <i class="fas fa-sign-in-alt"></i> تسجيل دخول
+                            </a>
+                            <a class="btn btn-light" asp-area="" asp-controller="Account" asp-action="Register">
+                                <i class="fas fa-user-plus"></i> إنشاء حساب
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        @RenderBody()
+    </main>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery (if needed) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="~/js/smart-recycle.js" asp-append-version="true"></script>
+
+    <!-- Sidebar JavaScript -->
+    <script>
+        // فتح وإغلاق السايدبار
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const sidebarClose = document.getElementById('sidebarClose');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        function openSidebar() {
+            mobileSidebar.classList.add('show');
+            sidebarOverlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            mobileSidebar.classList.remove('show');
+            sidebarOverlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', openSidebar);
+        }
+
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        // إغلاق السايدبار عند الضغط على أي رابط
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav-link, .sidebar-dropdown-item');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                setTimeout(closeSidebar, 200);
+            });
+        });
+
+        // Dropdown toggles في السايدبار
+        const dropdownToggles = document.querySelectorAll('.sidebar-dropdown-toggle');
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const dropdownId = this.getAttribute('data-dropdown');
+                const dropdown = document.getElementById(dropdownId);
+
+                // إغلاق جميع الـ dropdowns الأخرى
+                document.querySelectorAll('.sidebar-dropdown').forEach(d => {
+                    if (d.id !== dropdownId) {
+                        d.classList.remove('show');
+                    }
+                });
+
+                document.querySelectorAll('.sidebar-dropdown-toggle').forEach(t => {
+                    if (t !== this) {
+                        t.classList.remove('active');
+                    }
+                });
+
+                // تبديل الحالة للـ dropdown الحالي
+                dropdown.classList.toggle('show');
+                this.classList.toggle('active');
+            });
+        });
+
+        // إغلاق السايدبار عند تكبير الشاشة
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 991) {
+                closeSidebar();
+            }
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

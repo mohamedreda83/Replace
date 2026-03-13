@@ -1,0 +1,272 @@
+﻿@model SmartRecycle.Models.Machines
+
+@{
+    ViewData["Title"] = "تفاصيل الماكينة #" + Model.Id;
+    var loginUrl = $"{Context.Request.Scheme}://{Context.Request.Host}/Machines/LoginToMachine?machineId={Model.Id}&urlGuid={Model.URL_GUID}";
+}
+
+<div class="container mt-4">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="row">
+        <!-- Main Info Card -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-info-circle"></i> معلومات الماكينة #@Model.Id
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h6 class="text-muted">
+                                <i class="fas fa-map-marker-alt"></i> الموقع
+                            </h6>
+                            <p class="h5">@Model.Location</p>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <h6 class="text-muted">
+                                <i class="fas fa-toggle-on"></i> الحالة
+                            </h6>
+                            <p>
+                                @if (Model.Status == "Active")
+                                {
+                                    <span class="badge bg-success fs-6">
+                                        <i class="fas fa-check"></i> نشطة
+                                    </span>
+                                }
+                                else if (Model.Status == "Maintenance")
+                                {
+                                    <span class="badge bg-warning fs-6">
+                                        <i class="fas fa-tools"></i> قيد الصيانة
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger fs-6">
+                                        <i class="fas fa-times"></i> غير نشطة
+                                    </span>
+                                }
+                            </p>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <h6 class="text-muted">
+                                <i class="fas fa-tools"></i> آخر صيانة
+                            </h6>
+                            <p>
+                                @if (Model.LastMaintenanceDate.HasValue)
+                                {
+                                    @Model.LastMaintenanceDate.Value.ToString("dd/MM/yyyy")
+                                }
+                                else
+                                {
+                                    <span class="text-muted">لم تتم صيانة بعد</span>
+                                }
+                            </p>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <h6 class="text-muted">
+                                <i class="fas fa-key"></i> API Key
+                            </h6>
+                            <p>
+                                @if (!string.IsNullOrEmpty(Model.ApiKey))
+                                {
+                                    <code class="bg-light p-2 rounded">@Model.ApiKey</code>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">غير محدد</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login URL Card -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-link"></i> رابط تسجيل الدخول للماكينة
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label"><strong>URL GUID:</strong></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control font-monospace"
+                                   id="urlGuidInput" value="@Model.URL_GUID" readonly>
+                            <button class="btn btn-outline-secondary" onclick="copyToClipboard('urlGuidInput')">
+                                <i class="fas fa-copy"></i> نسخ
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label"><strong>رابط تسجيل الدخول الكامل:</strong></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control"
+                                   id="loginUrlInput" value="@loginUrl" readonly>
+                            <button class="btn btn-outline-secondary" onclick="copyToClipboard('loginUrlInput')">
+                                <i class="fas fa-copy"></i> نسخ
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <a href="@loginUrl" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i> فتح الرابط
+                        </a>
+
+                        <button type="button" class="btn btn-warning"
+                                data-bs-toggle="modal" data-bs-target="#regenerateModal">
+                            <i class="fas fa-sync-alt"></i> تجديد الرابط
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions Card -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-cogs"></i> الإجراءات
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> رجوع للقائمة
+                        </a>
+
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> تعديل الماكينة
+                        </a>
+
+                        <button type="button" class="btn btn-danger"
+                                data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            <i class="fas fa-trash"></i> حذف الماكينة
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR Code Card -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-qrcode"></i> QR Code
+                    </h5>
+                </div>
+                <div class="card-body text-center">
+                    <div id="qrcode" class="mb-3"></div>
+                    <small class="text-muted">امسح الكود للوصول السريع</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Regenerate GUID Modal -->
+<div class="modal fade" id="regenerateModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">تجديد رابط الماكينة</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p><i class="fas fa-exclamation-triangle text-warning"></i> هل أنت متأكد من تجديد رابط الماكينة؟</p>
+                <p class="text-danger">الرابط القديم سيصبح غير صالح وسيتم توليد رابط جديد.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <form asp-action="RegenerateGuid" asp-route-id="@Model.Id" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-sync-alt"></i> تجديد الرابط
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">تأكيد الحذف</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>هل أنت متأكد من حذف الماكينة <strong>#@Model.Id</strong>؟</p>
+                <p class="text-danger"><i class="fas fa-exclamation-triangle"></i> هذا الإجراء لا يمكن التراجع عنه!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> حذف نهائي
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        // Generate QR Code
+        new QRCode(document.getElementById("qrcode"), {
+            text: "@loginUrl",
+            width: 200,
+            height: 200,
+            colorDark: "#000000",
+            colorLight: "#ffffff"
+        });
+
+        // Copy to clipboard function
+        function copyToClipboard(elementId) {
+            const input = document.getElementById(elementId);
+            input.select();
+            input.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+
+            // Show success message
+            const btn = event.target.closest('button');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+            btn.classList.add('btn-success');
+            btn.classList.remove('btn-outline-secondary');
+
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-outline-secondary');
+            }, 2000);
+        }
+
+        // Auto-hide alerts
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 5000);
+    </script>
+}

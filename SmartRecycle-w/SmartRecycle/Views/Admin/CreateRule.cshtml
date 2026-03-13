@@ -1,0 +1,118 @@
+﻿<!-- CreateRule.cshtml -->
+@model SmartRecycle.Models.Rule
+@{
+    ViewData["Title"] = "إضافة قاعدة جديدة";
+}
+
+<style>
+    .form-container {
+        max-width: 700px;
+        margin: 50px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+    }
+
+    .form-header {
+        text-align: center;
+        color: var(--dark-green);
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid var(--primary-green);
+    }
+
+        .form-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+    .char-counter {
+        text-align: left;
+        font-size: 0.9rem;
+        color: #999;
+        margin-top: 5px;
+    }
+
+    .form-footer {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 2px solid #eee;
+    }
+</style>
+
+<div class="form-container">
+    <div class="form-header">
+        <h2>📝 إضافة قاعدة جديدة</h2>
+        <p style="color: #666;">أضف قاعدة أو شرط جديد لاستخدام الموقع والماكينة</p>
+    </div>
+
+    <form asp-action="CreateRule" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label asp-for="Title">عنوان القاعدة</label>
+            <input asp-for="Title" class="form-control" placeholder="مثال: تسجيل الدخول مطلوب"
+                   maxlength="200" oninput="updateCharCount('title', this.value, 200)" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+            <div class="char-counter" id="title-counter">0 / 200</div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description">وصف القاعدة</label>
+            <textarea asp-for="Description" class="form-control"
+                      placeholder="اكتب تفاصيل القاعدة وشرحها..."
+                      style="min-height: 150px;"
+                      oninput="updateCharCount('desc', this.value, 1000)"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+            <div class="char-counter" id="desc-counter">0 / 1000</div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Order">ترتيب العرض</label>
+            <input asp-for="Order" type="number" class="form-control"
+                   placeholder="1" min="1" value="1" />
+            <span asp-validation-for="Order" class="text-danger"></span>
+            <small style="color: #666;">يحدد ترتيب ظهور القاعدة في القائمة</small>
+        </div>
+
+        <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input asp-for="IsActive" type="checkbox" checked
+                       style="width: 20px; height: 20px; cursor: pointer;" />
+                <span>تفعيل القاعدة فوراً</span>
+            </label>
+        </div>
+
+        <div class="form-footer">
+            <button type="submit" class="btn-primary" style="flex: 1;">
+                ✓ حفظ القاعدة
+            </button>
+            <a href="@Url.Action("Rules")" class="btn-cancel">
+                ✖️ إلغاء
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        function updateCharCount(id, value, max) {
+            const counter = document.getElementById(id + '-counter');
+            counter.textContent = `${value.length} / ${max}`;
+
+            if (value.length > max * 0.9) {
+                counter.style.color = '#f44336';
+            } else if (value.length > max * 0.7) {
+                counter.style.color = '#FF9800';
+            } else {
+                counter.style.color = '#999';
+            }
+        }
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

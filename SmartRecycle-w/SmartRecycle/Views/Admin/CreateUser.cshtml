@@ -1,0 +1,104 @@
+﻿@model SmartRecycle.Models.User
+@{
+    ViewData["Title"] = "Create User";
+}
+<link rel="stylesheet" href="~/css/admin-styles.css">
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>Create New User</h6>
+                </div>
+                <div class="card-body px-4 pt-0 pb-2">
+                    <form asp-action="CreateUser" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Username" class="form-control-label">Username</label>
+                                    <input type="text" id="Username" name="Username" class="form-control" required>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="PasswordHash" class="form-control-label">Password</label>
+                                    <input type="password" id="PasswordHash" name="PasswordHash" class="form-control" required>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="PasswordHash" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Gmail" class="form-control-label">Email</label>
+                                    <input type="email" id="Gmail" name="Gmail" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Phone" class="form-control-label">Phone Number</label>
+                                    <input type="tel" id="Phone" name="Phone" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Address" class="form-control-label">Address</label>
+                                    <textarea id="Address" name="Address" class="form-control" rows="3" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Branch" class="form-control-label">Branch</label>
+                                    <select id="Branch" name="Branch" class="form-control" required>
+                                        <option value="" selected disabled>Select nearest branch</option>
+                                        <option value="Smoha">Smoha</option>
+                                        <option value="Glim">Glim</option>
+                                        <option value="AlNasr">AlNasr</option>
+                                        <option value="SidiGaber">SidiGaber</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Roles" class="form-control-label">Role</label>
+                                    <select id="Roles" name="Roles" class="form-control" required>
+                                        <option value="user" selected>User</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Points" class="form-control-label">Points</label>
+                                    <input type="number" id="Points" name="Points" class="form-control" value="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12 text-end">
+                                <a href="@Url.Action("Users", "Admin")" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Create User</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+}

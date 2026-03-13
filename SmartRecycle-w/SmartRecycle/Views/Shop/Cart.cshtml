@@ -1,0 +1,216 @@
+﻿@model SmartRecycle.Models.Cart
+@{
+    ViewData["Title"] = "سلة المشتريات";
+    int totalPoints = 0;
+    if (Model.CartItems != null)
+    {
+        foreach (var item in Model.CartItems)
+        {
+            totalPoints += item.Product.PointsPrice * item.Quantity;
+        }
+    }
+}
+<link href="~/css/cart.css" rel="stylesheet" />
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-white p-3 rounded shadow-sm">
+            <li class="breadcrumb-item"><a href="@Url.Action("Login", "Account")">الرئيسية</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Shop")">المتجر</a></li>
+            <li class="breadcrumb-item active" aria-current="page">سلة المشتريات</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0"><i class="fas fa-shopping-cart me-2"></i> سلة المشتريات</h4>
+                    @if (Model.CartItems != null && Model.CartItems.Any())
+                    {
+                        <span class="badge bg-light text-dark">@Model.CartItems.Count() منتج</span>
+                    }
+                </div>
+                <div class="card-body">
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i> @TempData["ErrorMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    @if (Model.CartItems != null && Model.CartItems.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>المنتج</th>
+                                        <th width="120">الصورة</th>
+                                        <th>السعر (نقاط)</th>
+                                        <th width="150">الكمية</th>
+                                        <th>الإجمالي</th>
+                                        <th width="80">إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CartItems)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href="@Url.Action("Details", "Shop", new { id = item.ProductId })" class="text-decoration-none fw-bold">@item.Product.Name</a>
+                                                <div class="small text-muted">@item.Product.Description</div>
+                                            </td>
+                                            <td>
+                                                <img src="@(string.IsNullOrEmpty(item.Product.ImageUrl) ? "/images/no-image.jpg" : item.Product.ImageUrl)"
+                                                     class="img-thumbnail rounded" alt="@item.Product.Name" style="max-height: 80px; object-fit: cover;">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fas fa-star text-warning me-1"></i>
+                                                    <span>@item.Product.PointsPrice</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <form asp-action="UpdateCart" asp-controller="Shop" method="post" class="d-flex align-items-center">
+                                                    <input type="hidden" name="cartItemId" value="@item.Id" />
+                                                    <div class="input-group input-group-sm">
+                                                        <button type="button" class="btn btn-outline-primary" onclick="decrementCartItem(@item.Id)">-</button>
+                                                        <input type="number" class="form-control text-center" id="quantity-@item.Id" name="quantity" value="@item.Quantity" min="1" max="@item.Product.Stock">
+                                                        <button type="button" class="btn btn-outline-primary" onclick="incrementCartItem(@item.Id, @item.Product.Stock)">+</button>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-sm btn-outline-success ms-2" title="تحديث الكمية">
+                                                        <i class="fas fa-sync-alt"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center fw-bold">
+                                                    <i class="fas fa-star text-warning me-1"></i>
+                                                    <span>@(item.Product.PointsPrice * item.Quantity)</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <form asp-action="RemoveFromCart" asp-controller="Shop" method="post">
+                                                    <input type="hidden" name="cartItemId" value="@item.Id" />
+                                                    <button type="submit" class="btn btn-sm btn-danger" title="إزالة من السلة">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+                            <div class="mb-4">
+                                <i class="fas fa-shopping-cart fa-5x text-muted"></i>
+                            </div>
+                            <h4>سلة المشتريات فارغة</h4>
+                            <p class="text-muted">لم تقم بإضافة أي منتجات إلى سلة المشتريات بعد</p>
+                            <a href="@Url.Action("Index", "Shop")" class="btn btn-primary mt-3">
+                                <i class="fas fa-shopping-bag"></i> تسوق الآن
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        @if (Model.CartItems != null && Model.CartItems.Any())
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-receipt me-2"></i> ملخص الطلب</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>عدد المنتجات:</span>
+                            <span>@Model.CartItems.Count()</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>إجمالي الكمية:</span>
+                            <span>@Model.CartItems.Sum(i => i.Quantity)</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">الإجمالي:</h5>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-star text-warning me-1 fa-lg"></i>
+                                <span class="fw-bold fs-5">@totalPoints</span>
+                                <span class="text-muted ms-1">نقطة</span>
+                            </div>
+                        </div>
+                        <form asp-action="Checkout" asp-controller="Order" method="post" class="mt-3">
+                            <button type="submit" class="btn btn-success w-100 p-2">
+                                <i class="fas fa-check me-2"></i> إتمام الشراء
+                            </button>
+                        </form>
+                        <a href="@Url.Action("Index", "Shop")" class="btn btn-outline-primary w-100 mt-2">
+                            <i class="fas fa-arrow-left me-2"></i> مواصلة التسوق
+                        </a>
+                        <a href="@Url.Action("ClearCart", "Shop")" class="btn btn-outline-danger w-100 mt-2" onclick="return confirm('هل أنت متأكد من تفريغ سلة المشتريات؟')">
+                            <i class="fas fa-trash me-2"></i> تفريغ السلة
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i> معلومات مفيدة</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                يمكنك تعديل الكمية والضغط على زر التحديث
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                يمكنك إزالة منتج من السلة بالضغط على زر الحذف
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                سيتم خصم النقاط من رصيدك عند إتمام الشراء
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function incrementCartItem(itemId, maxStock) {
+            var quantityInput = document.getElementById('quantity-' + itemId);
+            var currentValue = parseInt(quantityInput.value);
+
+            if (currentValue < maxStock) {
+                quantityInput.value = currentValue + 1;
+            }
+        }
+
+        function decrementCartItem(itemId) {
+            var quantityInput = document.getElementById('quantity-' + itemId);
+            var currentValue = parseInt(quantityInput.value);
+
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        }
+    </script>
+}

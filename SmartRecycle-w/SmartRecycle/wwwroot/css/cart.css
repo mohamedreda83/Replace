@@ -1,0 +1,382 @@
+﻿/* تنسيقات عامة للصفحة */
+body {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* تنسيقات مسار التنقل */
+.breadcrumb {
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.breadcrumb-item a {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+    .breadcrumb-item a:hover {
+        color: #0a58ca;
+        text-decoration: underline;
+    }
+
+.breadcrumb-item.active {
+    color: #6c757d;
+    font-weight: 600;
+}
+
+/* تنسيقات البطاقات */
+.card {
+    border: none;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    margin-bottom: 2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.18);
+    }
+
+.card-header {
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    border-bottom: none;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* تنسيق الجدول */
+.table {
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+    .table thead th {
+        font-weight: 600;
+        color: #495057;
+        border-bottom: 2px solid #e9ecef;
+        background-color: #f8f9fa;
+        padding: 1rem;
+    }
+
+    .table tbody td {
+        vertical-align: middle;
+        padding: 1rem;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .table tbody tr {
+        transition: background-color 0.2s;
+    }
+
+        .table tbody tr:hover {
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+
+/* تنسيق صور المنتجات في السلة */
+.img-thumbnail {
+    border-radius: 0.75rem;
+    border: none;
+    padding: 0.25rem;
+    background-color: #fff;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+    .img-thumbnail:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    }
+
+/* تنسيق محدد الكمية */
+.input-group-sm {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+    .input-group-sm .form-control {
+        border-radius: 0;
+        text-align: center;
+        font-weight: 600;
+        height: 38px;
+        width: 3rem;
+        border: 1px solid #ced4da;
+    }
+
+    .input-group-sm .btn {
+        border-radius: 0;
+        width: 2rem;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ced4da;
+        background-color: #f8f9fa;
+        color: #0d6efd;
+        transition: all 0.2s;
+    }
+
+        .input-group-sm .btn:hover {
+            background-color: #0d6efd;
+            color: #fff;
+            border-color: #0d6efd;
+        }
+
+/* تنسيق الأزرار */
+.btn {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-success {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-primary {
+    color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+    .btn-outline-primary:hover {
+        background-color: #0d6efd;
+        color: #fff;
+    }
+
+.btn-outline-success {
+    color: #198754;
+    border-color: #198754;
+}
+
+    .btn-outline-success:hover {
+        background-color: #198754;
+        color: #fff;
+    }
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+/* تنسيق ملخص الطلب */
+.card-header.bg-success {
+    background: linear-gradient(135deg, #198754, #20c997) !important;
+}
+
+.card-header.bg-primary {
+    background: linear-gradient(135deg, #0d6efd, #0dcaf0) !important;
+}
+
+.card-header.bg-info {
+    background: linear-gradient(135deg, #0dcaf0, #6610f2) !important;
+}
+
+/* تنسيق السلة الفارغة */
+.text-center.py-5 {
+    padding: 3rem 0;
+}
+
+    .text-center.py-5 .fa-shopping-cart {
+        color: #dee2e6;
+        margin-bottom: 1.5rem;
+        animation: pulse 2s infinite;
+    }
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* تنسيق رمز النجمة للنقاط */
+.fa-star.text-warning {
+    color: #ffc107 !important;
+}
+
+/* تنسيق نص السعر والإجمالي */
+.fw-bold.fs-5 {
+    font-size: 1.25rem !important;
+    color: #212529;
+}
+
+/* تنسيق قائمة المعلومات المفيدة */
+.list-unstyled li {
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed #dee2e6;
+}
+
+    .list-unstyled li:last-child {
+        border-bottom: none;
+    }
+
+/* تنسيق التحذيرات والإشعارات */
+.alert {
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: none;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.075);
+}
+
+.alert-success {
+    background-color: rgba(25, 135, 84, 0.1);
+    color: #155724;
+    border-right: 4px solid #198754;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #721c24;
+    border-right: 4px solid #dc3545;
+}
+
+/* تنسيقات للشاشات المتوسطة */
+@media (max-width: 991.98px) {
+    .container {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .card-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .card-body {
+        padding: 1.25rem;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 0.75rem;
+    }
+}
+
+/* تنسيقات للشاشات الصغيرة */
+@media (max-width: 767.98px) {
+    .table thead th,
+    .table tbody td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 0.375rem 0.75rem;
+    }
+
+    .input-group-sm .form-control {
+        width: 2.5rem;
+    }
+
+    .fw-bold.fs-5 {
+        font-size: 1.1rem !important;
+    }
+
+    .alert {
+        padding: 0.75rem;
+    }
+}
+
+/* تنسيقات للشاشات الصغيرة جدًا */
+@media (max-width: 575.98px) {
+    .breadcrumb {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .card-header h4,
+    .card-header h5 {
+        font-size: 1.1rem;
+    }
+
+    .table {
+        font-size: 0.85rem;
+    }
+
+        .table thead th:nth-child(2),
+        .table tbody td:nth-child(2) {
+            display: none;
+        }
+
+    .img-thumbnail {
+        max-height: 60px;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .input-group-sm .form-control {
+        width: 2rem;
+        height: 32px;
+    }
+
+    .input-group-sm .btn {
+        width: 1.5rem;
+        height: 32px;
+    }
+
+    .btn-sm {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.8rem;
+    }
+
+    .list-unstyled li {
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,180 @@
+﻿@model SmartRecycle.Models.Order
+@{
+    ViewData["Title"] = "تفاصيل الطلب";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">تفاصيل الطلب رقم #@Model.Id</h4>
+                </div>
+                <div class="card-body">
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>معلومات الطلب</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    رقم الطلب
+                                    <span class="badge bg-primary rounded-pill">@Model.Id</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    تاريخ الطلب
+                                    <span>@Model.OrderDate.ToString("yyyy-MM-dd HH:mm")</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    حالة الطلب
+                                    @switch (Model.Status)
+                                    {
+                                        case "معلق":
+                                            <span class="badge bg-warning">معلق</span>
+                                            break;
+                                        case "متاح للاستلام - يرجى اختيار الفرع":
+                                            <span class="badge bg-info">متاح للاستلام</span>
+                                            break;
+                                        case "مكتمل":
+                                            <span class="badge bg-success">مكتمل</span>
+                                            break;
+                                        case "ملغي":
+                                            <span class="badge bg-danger">ملغي</span>
+                                            break;
+                                        case "قيد التنفيذ":
+                                            <span class="badge bg-info">قيد التنفيذ</span>
+                                            break;
+                                        default:
+                                            @if (Model.Status.Contains("يرجى التوجه لفرع"))
+                                            {
+                                                <span class="badge bg-success">جاهز للاستلام</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-secondary">@Model.Status</span>
+                                            }
+                                            break;
+                                    }
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    إجمالي النقاط
+                                    <span class="badge bg-success">@Model.TotalPoints نقطة</span>
+                                </li>
+                                @if (!string.IsNullOrEmpty(Model.SelectedBranch))
+                                {
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        فرع الاستلام المختار
+                                        <span class="badge bg-info">@Model.SelectedBranch</span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            @if (Model.Status == "متاح للاستلام - يرجى اختيار الفرع" && !string.IsNullOrEmpty(Model.AvailableBranches))
+                            {
+                                <div class="card border-info">
+                                    <div class="card-header bg-info text-white">
+                                        <h6 class="mb-0">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            اختيار فرع الاستلام
+                                        </h6>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <p>طلبك جاهز! يرجى اختيار الفرع المناسب لك للاستلام</p>
+                                        <div class="mb-3">
+                                            <strong>الفروع المتاحة:</strong><br>
+                                            @foreach (var branch in Model.AvailableBranches.Split(','))
+                                            {
+                                                <span class="badge bg-light text-dark me-1 mb-1">@branch.Trim()</span>
+                                            }
+                                        </div>
+                                        <a asp-action="SelectBranch" asp-route-id="@Model.Id" class="btn btn-info">
+                                            <i class="fas fa-map-marker-alt"></i> اختيار الفرع
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.Status.Contains("يرجى التوجه لفرع"))
+                            {
+                                <div class="card border-success">
+                                    <div class="card-header bg-success text-white">
+                                        <h6 class="mb-0">
+                                            <i class="fas fa-check-circle"></i>
+                                            معلومات الاستلام
+                                        </h6>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <div class="alert alert-success">
+                                            <h5><i class="fas fa-store"></i></h5>
+                                            <p class="mb-2">@Model.Status</p>
+                                            <hr>
+                                            <p class="mb-0">
+                                                <strong>كود الطلب:</strong>
+                                                <span class="badge bg-dark fs-6">#@Model.Id</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <h5>المنتجات</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>المنتج</th>
+                                    <th width="120">الصورة</th>
+                                    <th>السعر (نقاط)</th>
+                                    <th>الكمية</th>
+                                    <th>الإجمالي</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderItems)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("Details", "Shop", new { id = item.ProductId })">@item.Product.Name</a>
+                                            <div class="small text-muted">@item.Product.Description</div>
+                                        </td>
+                                        <td>
+                                            <img src="@(string.IsNullOrEmpty(item.Product.ImageUrl) ? "/images/no-image.jpg" : item.Product.ImageUrl)"
+                                                 class="img-thumbnail" alt="@item.Product.Name" style="max-height: 80px;">
+                                        </td>
+                                        <td>@item.PointsPerItem</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@(item.PointsPerItem * item.Quantity) نقطة</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="text-end fw-bold">الإجمالي:</td>
+                                    <td class="fw-bold">@Model.TotalPoints نقطة</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="@Url.Action("Index", "Order")" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> العودة لقائمة الطلبات
+                        </a>
+
+                        <a href="@Url.Action("Index", "Shop")" class="btn btn-primary ms-2">
+                            <i class="fas fa-shopping-bag"></i> متابعة التسوق
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

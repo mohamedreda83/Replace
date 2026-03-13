@@ -1,0 +1,391 @@
+﻿@{
+    ViewData["Title"] = "Machine Home";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/machine-pages-unified-style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="scan-line"></div>
+    <div class="particles-bg"></div>
+    <div id="canvas-container"></div>
+
+    <div class="content-overlay" style="display: block; padding: 20px;">
+        <div class="container">
+            <div class="header-card">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="glow-text"><i class="fas fa-recycle"></i> مرحباً @ViewBag.Username</h1>
+                        <p class="mb-0"><i class="fas fa-map-marker-alt"></i> الموقع: @ViewBag.MachineLocation</p>
+                        <p class="mb-0"><i class="fas fa-robot"></i> ESP IP: @ViewBag.EspIpAddress</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="stat-box">
+                            <h3><i class="fas fa-coins"></i> النقاط</h3>
+                            <h2 id="userPoints">@ViewBag.UserPoints</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card glass-panel">
+                <div class="timer-box">
+                    <i class="fas fa-hourglass-half"></i> وقت الجلسة المتبقي
+                    <div id="countdown">5:00</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn action-btn btn-recycle w-100" id="recycleBtn" onclick="startRecycling()">
+                            <i class="fas fa-bottle-droplet fa-2x d-block mb-2"></i>
+                            ابدأ عملية التدوير
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn action-btn btn-logout w-100" onclick="logout()">
+                            <i class="fas fa-sign-out-alt fa-2x d-block mb-2"></i>
+                            تسجيل الخروج
+                        </button>
+                    </div>
+                </div>
+
+                <div class="detection-status" id="detectionStatus">
+                    <div class="text-center mb-3">
+                        <div class="spinner"></div>
+                        <p class="mt-3"><strong>جاري الكشف...</strong></p>
+                    </div>
+                </div>
+
+                <div id="resultsContainer"></div>
+
+                <div class="alert alert-info mt-4" role="alert">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>ملاحظة:</strong> سيتم تسجيل الخروج تلقائياً بعد انتهاء المدة المحددة
+                    <br>
+                    <small>البلاستيك: 7 نقاط | العلب المعدنية: 12 نقطة</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Initialize WebGL Background
+        function initWebGLBackground() {
+            const container = document.getElementById('canvas-container');
+            if (!container || typeof THREE === 'undefined') return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            const shapes = [];
+            const geometries = [
+                new THREE.IcosahedronGeometry(1, 0),
+                new THREE.OctahedronGeometry(1, 0),
+                new THREE.TetrahedronGeometry(1, 0)
+            ];
+
+            for (let i = 0; i < 15; i++) {
+                const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+                const material = new THREE.MeshPhongMaterial({
+                    color: i % 2 === 0 ? 0x2ecc71 : 0xffffff,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0.3
+                });
+
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.position.x = (Math.random() - 0.5) * 40;
+                mesh.position.y = (Math.random() - 0.5) * 40;
+                mesh.position.z = (Math.random() - 0.5) * 40;
+                mesh.scale.setScalar(Math.random() * 2 + 0.5);
+                
+                scene.add(mesh);
+                shapes.push({
+                    mesh: mesh,
+                    rotationSpeed: {
+                        x: (Math.random() - 0.5) * 0.02,
+                        y: (Math.random() - 0.5) * 0.02
+                    }
+                });
+            }
+
+            const light1 = new THREE.PointLight(0x2ecc71, 2, 100);
+            light1.position.set(10, 10, 10);
+            scene.add(light1);
+
+            const light2 = new THREE.PointLight(0xffffff, 1.5, 100);
+            light2.position.set(-10, -10, -10);
+            scene.add(light2);
+
+            const ambientLight = new THREE.AmbientLight(0x2c5364, 0.5);
+            scene.add(ambientLight);
+
+            camera.position.z = 20;
+
+            let mouseX = 0;
+            let mouseY = 0;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                shapes.forEach(shape => {
+                    shape.mesh.rotation.x += shape.rotationSpeed.x;
+                    shape.mesh.rotation.y += shape.rotationSpeed.y;
+                    shape.mesh.position.y += Math.sin(Date.now() * 0.001 + shape.mesh.position.x) * 0.01;
+                });
+
+                camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
+                camera.position.y += (mouseY * 2 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+
+                light1.position.x = Math.sin(Date.now() * 0.001) * 10;
+                light1.position.y = Math.cos(Date.now() * 0.001) * 10;
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Initialize WebGL on load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initWebGLBackground);
+        } else {
+            initWebGLBackground();
+        }
+    </script>
+
+    <script>
+        // ========== MACHINE OPERATIONS SCRIPT ==========
+        const ESP_IP = '@ViewBag.EspIpAddress';
+        const machineId = '@ViewBag.MachineId';
+        const userId = '@ViewBag.UserId';
+        let timeLeft = 300;
+        let isProcessing = false;
+        let detectionInterval = null;
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('countdown').textContent =
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+            if (timeLeft <= 0) {
+                alert('انتهت جلستك! سيتم تسجيل الخروج الآن');
+                logout();
+            } else if (timeLeft <= 60) {
+                document.getElementById('countdown').style.color = '#ff5252';
+            }
+
+            timeLeft--;
+        }
+
+        setInterval(updateTimer, 1000);
+
+        async function enableESP() {
+            try {
+                const response = await fetch(`http://${ESP_IP}/api/control`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ command: 'ON' })
+                });
+
+                if (!response.ok) throw new Error('فشل تفعيل النظام');
+
+                const data = await response.json();
+                console.log('ESP enabled:', data);
+                return true;
+            } catch (error) {
+                console.error('Error enabling ESP:', error);
+                alert('خطأ في الاتصال بالماكينة. تأكد من اتصال الشبكة.');
+                return false;
+            }
+        }
+
+        async function disableESP() {
+            try {
+                await fetch(`http://${ESP_IP}/api/control`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ command: 'OFF' })
+                });
+            } catch (error) {
+                console.error('Error disabling ESP:', error);
+            }
+        }
+
+        async function detectItems() {
+            try {
+                const response = await fetch(`http://${ESP_IP}/api/detections`);
+
+                if (!response.ok) {
+                    throw new Error('فشل الكشف');
+                }
+
+                const data = await response.json();
+
+                if (data.status === 'success' && (data.plasticBottles > 0 || data.cans > 0)) {
+                    await saveDetection(data);
+                    return true;
+                }
+
+                return false;
+            } catch (error) {
+                console.error('Detection error:', error);
+                return false;
+            }
+        }
+
+        async function saveDetection(detectionData) {
+            try {
+                const response = await fetch('@Url.Action("SaveRecyclingLog", "Machines")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+                    },
+                    body: JSON.stringify({
+                        userId: parseInt(userId),
+                        machineId: parseInt(machineId),
+                        plasticBottles: detectionData.plasticBottles,
+                        cans: detectionData.cans
+                    })
+                });
+
+                if (!response.ok) throw new Error('فشل حفظ البيانات');
+
+                const result = await response.json();
+                displayResults(result);
+
+                document.getElementById('userPoints').textContent = result.totalPoints;
+
+            } catch (error) {
+                console.error('Save error:', error);
+                alert('خطأ في حفظ البيانات');
+            }
+        }
+
+        function displayResults(result) {
+            const container = document.getElementById('resultsContainer');
+            const html = `
+                <div class="alert alert-success mt-3">
+                    <h5><i class="fas fa-check-circle"></i> تم التسجيل بنجاح!</h5>
+                    <div class="result-item">
+                        <span><i class="fas fa-bottle-water"></i> زجاجات بلاستيك: ${result.plasticBottles}</span>
+                        <span class="points-earned">+${result.plasticPoints} نقطة</span>
+                    </div>
+                    <div class="result-item">
+                        <span><i class="fas fa-can-food"></i> علب معدنية: ${result.cans}</span>
+                        <span class="points-earned">+${result.canPoints} نقطة</span>
+                    </div>
+                    <div class="result-item">
+                        <span><strong>الإجمالي</strong></span>
+                        <span class="points-earned">+${result.pointsEarned} نقطة</span>
+                    </div>
+                    <hr>
+                    <p class="mb-0"><strong>مجموع نقاطك: ${result.totalPoints}</strong></p>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        async function startRecycling() {
+            if (isProcessing) return;
+
+            isProcessing = true;
+            const btn = document.getElementById('recycleBtn');
+            const status = document.getElementById('detectionStatus');
+
+            btn.disabled = true;
+            status.classList.add('show');
+            document.getElementById('resultsContainer').innerHTML = '';
+
+            const enabled = await enableESP();
+
+            if (!enabled) {
+                btn.disabled = false;
+                status.classList.remove('show');
+                isProcessing = false;
+                return;
+            }
+
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            let detectionCount = 0;
+            const maxDetections = 15;
+
+            detectionInterval = setInterval(async () => {
+                detectionCount++;
+
+                const detected = await detectItems();
+
+                if (detected || detectionCount >= maxDetections) {
+                    clearInterval(detectionInterval);
+                    status.classList.remove('show');
+                    btn.disabled = false;
+                    isProcessing = false;
+
+                    if (!detected) {
+                        alert('لم يتم اكتشاف أي أشياء. حاول مرة أخرى.');
+                    }
+                }
+            }, 3000);
+        }
+
+        async function logout() {
+            if (confirm('هل تريد تسجيل الخروج؟')) {
+                await disableESP();
+                window.location.href = '@Url.Action("LogoutFromMachine", "Machines")';
+            }
+        }
+
+        window.addEventListener('beforeunload', function() {
+            disableESP();
+        });
+
+        setInterval(function() {
+            fetch('@Url.Action("CheckSession", "Machines")')
+                .then(response => {
+                    if (!response.ok) {
+                        disableESP();
+                        alert('انتهت جلستك!');
+                        window.location.href = '@Url.Action("LogoutSuccess", "Machines")';
+                    }
+                });
+        }, 30000);
+
+        window.onload = async function() {
+            await enableESP();
+        };
+    </script>
+    
+    @Html.AntiForgeryToken()
+</body>
+</html>

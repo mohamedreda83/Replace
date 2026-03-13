@@ -1,0 +1,119 @@
+﻿@model SmartRecycle.Models.Order
+
+@{
+    ViewData["Title"] = "تفاصيل الطلب";
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h3>تفاصيل الطلب رقم: @Model.Id</h3>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-secondary text-white">
+                            معلومات الطلب
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4 text-end">رقم الطلب:</dt>
+                                <dd class="col-sm-8">@Model.Id</dd>
+
+                                <dt class="col-sm-4 text-end">تاريخ الطلب:</dt>
+                                <dd class="col-sm-8">@Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                                <dt class="col-sm-4 text-end">إجمالي النقاط:</dt>
+                                <dd class="col-sm-8">@Model.TotalPoints</dd>
+
+                                <dt class="col-sm-4 text-end">حالة الطلب:</dt>
+                                <dd class="col-sm-8">
+                                    @if (Model.Status == "Pending" || Model.Status == "معلق")
+                                    {
+                                        <span class="badge bg-warning text-dark">معلق</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">@Model.Status</span>
+                                    }
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-secondary text-white">
+                            معلومات المستخدم
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4 text-end">رقم المستخدم:</dt>
+                                <dd class="col-sm-8">@Model.UserId</dd>
+
+                                <dt class="col-sm-4 text-end">اسم المستخدم:</dt>
+                                <dd class="col-sm-8">@Model.User.Username</dd>
+                                <dt class="col-sm-4 text-end">رقم الهاتف:</dt>
+                                <dd class="col-sm-8">@Model.User.Phone</dd>
+                                <dt class="col-sm-4 text-end">العنوان:</dt>
+                                <dd class="col-sm-8">@Model.User.Address</dd>
+                                <dt class="col-sm-4 text-end">اقرب فرع:</dt>
+                                <dd class="col-sm-8">@Model.User.Branch</dd>
+                                <dt class="col-sm-4 text-end">النقاط الحالية:</dt>
+                                <dd class="col-sm-8">@Model.User.Points</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    منتجات الطلب
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>المنتج</th>
+                                    <th>الكمية</th>
+                                    <th>النقاط للوحدة</th>
+                                    <th>إجمالي النقاط</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderItems)
+                                {
+                                    <tr>
+                                        <td>@item.Product.Name</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.PointsPerItem</td>
+                                        <td>@(item.Quantity * item.PointsPerItem)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="3" class="text-end">الإجمالي:</th>
+                                    <th>@Model.TotalPoints</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 text-center">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> تعديل الطلب
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-right"></i> العودة للقائمة
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

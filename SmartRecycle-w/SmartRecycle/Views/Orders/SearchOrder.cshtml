@@ -1,0 +1,40 @@
+﻿<!-- Views/Orders/SearchOrder.cshtml -->
+@{
+    ViewData["Title"] = "البحث عن طلب";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title" style="color: black;">البحث عن طلب بالكود</h3>
+                </div>
+                <div class="card-body">
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger" style="color: black;">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success" style="color: black;">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
+
+                    <form method="post" asp-action="SearchOrder">
+                        <div class="form-group">
+                            <label for="orderCode" style="color: black;">كود الطلب</label>
+                            <input type="text" name="orderCode" id="orderCode" class="form-control"
+                                   placeholder="أدخل كود الطلب" required style="color: black;">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-search"></i> بحث
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

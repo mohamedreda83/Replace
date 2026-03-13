@@ -1,0 +1,108 @@
+﻿@model SmartRecycle.Models.Machines
+
+@{
+    ViewData["Title"] = "تعديل الماكينة #" + Model.Id;
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">
+                        <i class="fas fa-edit"></i> تعديل الماكينة #@Model.Id
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="URL_GUID" />
+
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <!-- Location -->
+                        <div class="mb-3">
+                            <label asp-for="Location" class="form-label">
+                                <i class="fas fa-map-marker-alt"></i> موقع الماكينة <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="Location" class="form-control" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label">
+                                <i class="fas fa-toggle-on"></i> حالة الماكينة <span class="text-danger">*</span>
+                            </label>
+                            <select asp-for="Status" class="form-select">
+                                <option value="Active">نشطة (Active)</option>
+                                <option value="Inactive">غير نشطة (Inactive)</option>
+                                <option value="Maintenance">قيد الصيانة (Maintenance)</option>
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+
+                        <!-- Last Maintenance Date -->
+                        <div class="mb-3">
+                            <label asp-for="LastMaintenanceDate" class="form-label">
+                                <i class="fas fa-tools"></i> تاريخ آخر صيانة
+                            </label>
+                            <input asp-for="LastMaintenanceDate" type="date" class="form-control" />
+                            <small class="form-text text-muted">اختياري</small>
+                        </div>
+
+                        <!-- API Key -->
+                        <div class="mb-3">
+                            <label asp-for="ApiKey" class="form-label">
+                                <i class="fas fa-key"></i> API Key
+                            </label>
+                            <div class="input-group">
+                                <input asp-for="ApiKey" type="text" class="form-control" />
+                                <button class="btn btn-outline-secondary" type="button" onclick="generateApiKey()">
+                                    <i class="fas fa-random"></i> توليد جديد
+                                </button>
+                            </div>
+                            <small class="form-text text-muted">اختياري</small>
+                        </div>
+
+                        <!-- Info Alert -->
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>ملاحظة:</strong> URL_GUID لن يتغير. لتغييره استخدم زر "تجديد الرابط" في صفحة التفاصيل.
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <div>
+                                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> إلغاء
+                                </a>
+                            </div>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-save"></i> حفظ التعديلات
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function generateApiKey() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let apiKey = 'SK_';
+            for (let i = 0; i < 32; i++) {
+                apiKey += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('ApiKey').value = apiKey;
+        }
+    </script>
+}

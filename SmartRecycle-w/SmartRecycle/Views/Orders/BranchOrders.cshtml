@@ -1,0 +1,95 @@
+﻿<!-- Views/Orders/BranchOrders.cshtml -->
+@model List<SmartRecycle.Models.Order>
+
+@{
+    ViewData["Title"] = "طلبات الفروع";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title" style="color: black;">طلبات الفروع</h3>
+                </div>
+                <div class="card-body">
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger" style="color: black;">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
+
+                    <form method="post" asp-action="BranchOrders">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label style="color: black;">اختر الفرع</label>
+                                    <select name="selectedBranch" class="form-control" required style="color: black;">
+                                        @foreach (var branch in ViewBag.Branches as List<SelectListItem>)
+                                        {
+                                            <option value="@branch.Value" selected="@branch.Selected">@branch.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <button type="submit" class="btn btn-primary form-control">بحث</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    @if (Model != null && Model.Any())
+                    {
+                        <hr />
+                        <h4 style="color: black;">طلبات فرع @ViewBag.SelectedBranch</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="color: black;">رقم الطلب</th>
+                                        <th style="color: black;">اسم العميل</th>
+                                        <th style="color: black;">تاريخ الطلب</th>
+                                        <th style="color: black;">الحالة</th>
+                                        <th style="color: black;">إجمالي النقاط</th>
+                                        <th style="color: black;">الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var order in Model)
+                                    {
+                                        <tr class="@(order.Status == "مكتمل" ? "table-success" : "")">
+                                            <td style="color: black;">@order.Id</td>
+                                            <td style="color: black;">@order.User.Username</td>
+                                            <td style="color: black;">@order.OrderDate.ToString("yyyy/MM/dd HH:mm")</td>
+                                            <td>
+                                                <span class="badge @(order.Status == "مكتمل" ? "badge-success" : order.Status == "ملغي" ? "badge-danger" : order.Status == "معلق" ? "badge-secondary" : "badge-warning")" style="color: white;">
+                                                    @order.Status
+                                                </span>
+                                            </td>
+                                            <td style="color: black;">@order.TotalPoints</td>
+                                            <td>
+                                                <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-info btn-sm">
+                                                    <i class="fas fa-eye"></i> عرض
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else if (ViewBag.SelectedBranch != null)
+                    {
+                        <div class="alert alert-info" style="color: black;">
+                            لا توجد طلبات لهذا الفرع حالياً
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

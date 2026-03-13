@@ -1,0 +1,761 @@
+﻿@model SmartRecycle.Models.HomeViewModel
+@using System.Linq
+
+@{
+    ViewData["Title"] = "Replace - Smart Recycling";
+}
+
+@section Styles {
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --dark-green: #2E7D32;
+            --light-green: #81C784;
+            --accent-blue: #2196F3;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: var(--light-bg);
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 15px 20px;
+            margin: 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            animation: slideDown 0.5s ease;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        @@keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--primary-green) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-button {
+            padding: 15px 40px;
+            background: white;
+            color: var(--primary-green);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Floating elements */
+        .floating-bottle {
+            position: absolute;
+            font-size: 3rem;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @@keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        @@keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--dark-green);
+            margin-bottom: 50px;
+        }
+
+        /* How It Works */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .step-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .step-card h3 {
+            color: var(--dark-green);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Machine Info */
+        .machine-info {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+            color: white;
+            padding: 80px 20px;
+            margin: 50px 0;
+        }
+
+        .machine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .machine-feature {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .machine-feature h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .points-display {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        /* Rules Section */
+        .rules-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .rule-item {
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary-green);
+            background: var(--light-bg);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .rule-item:hover {
+            transform: translateX(10px);
+            background: #e8f5e9;
+        }
+
+        /* Ratings Section */
+        .rating-stats {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 50px;
+        }
+
+        .average-rating {
+            font-size: 4rem;
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .stars {
+            font-size: 2rem;
+            color: #FFD700;
+            margin: 20px 0;
+        }
+
+        .rating-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-direction: row-reverse;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 3rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #FFD700;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin: 20px 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--dark-green);
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: var(--primary-green);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin: 15px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: var(--primary-green);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--dark-green);
+        }
+
+        .faq-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: white;
+        }
+
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+}
+
+<!-- Alert Messages -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-error">
+        @TempData["Error"]
+    </div>
+}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="floating-bottle" style="top: 10%; left: 10%;">♻️</div>
+    <div class="floating-bottle" style="top: 70%; right: 15%; animation-delay: 2s;">🥤</div>
+    <div class="floating-bottle" style="bottom: 20%; left: 20%; animation-delay: 4s;">♻️</div>
+
+    <div class="hero-content">
+        <h1>مرحباً بك في Replace</h1>
+        <p>حول النفايات البلاستيكية إلى نقاط واحصل على مكافآت</p>
+        <a href="/Account/Register" class="cta-button">ابدأ الآن</a>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="section">
+    <h2 class="section-title">كيف يعمل النظام؟</h2>
+    <div class="steps-container">
+        <div class="step-card">
+            <div class="step-icon">📱</div>
+            <h3>سجل دخولك</h3>
+            <p>امسح رمز QR الموجود على الماكينة لتسجيل الدخول</p>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">♻️</div>
+            <h3>ضع المواد</h3>
+            <p>ضع الزجاجات البلاستيكية أو العلب المعدنية في الماكينة</p>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">📸</div>
+            <h3>اكتشاف تلقائي</h3>
+            <p>اضغط زر الاكتشاف والكاميرا ستتعرف على نوع المادة</p>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">⭐</div>
+            <h3>اجمع النقاط</h3>
+            <p>احصل على نقاط فورية مع كل عملية إعادة تدوير</p>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">🎁</div>
+            <h3>استبدل النقاط</h3>
+            <p>استخدم نقاطك لشراء منتجات من المتجر</p>
+        </div>
+    </div>
+</section>
+
+<!-- Machine Info Section -->
+<div class="machine-info">
+    <div class="section-title" style="color: white;">معلومات عن الماكينة</div>
+    <div class="machine-grid">
+        <div class="machine-feature">
+            <h3>🥤 العلب المعدنية (Cans)</h3>
+            <div class="points-display">12 نقطة</div>
+            <p>لكل علبة معدنية تضعها في الماكينة</p>
+        </div>
+        <div class="machine-feature">
+            <h3>🍾 الزجاجات البلاستيكية</h3>
+            <div class="points-display">7 نقاط</div>
+            <p>لكل زجاجة بلاستيكية تضعها في الماكينة</p>
+        </div>
+        <div class="machine-feature">
+            <h3>⏱️ مدة الجلسة</h3>
+            <div class="points-display">5 دقائق</div>
+            <p>لكل جلسة على الماكينة، ثم يتم تسجيل الخروج تلقائياً</p>
+        </div>
+        <div class="machine-feature">
+            <h3>🔒 نظام آمن</h3>
+            <p>يجب الضغط على زر الاكتشاف مع كل عملية لضمان وجودك أمام الماكينة وحماية حسابك</p>
+        </div>
+        <div class="machine-feature">
+            <h3>🤖 ذكاء اصطناعي</h3>
+            <p>تستخدم الماكينة كاميرا ذكية للتعرف التلقائي على نوع المادة المعاد تدويرها</p>
+        </div>
+        <div class="machine-feature">
+            <h3>🌍 صديق للبيئة</h3>
+            <p>ساهم في حماية البيئة وقلل من التلوث البلاستيكي</p>
+        </div>
+    </div>
+</div>
+
+<!-- Rules Section -->
+<section class="section">
+    <h2 class="section-title">قواعد وشروط الاستخدام</h2>
+    <div class="rules-container">
+        @if (Model?.Rules != null && Model.Rules.Any())
+        {
+            foreach (var rule in Model.Rules)
+            {
+                <div class="rule-item">
+                    <h4 style="color: var(--dark-green); margin-bottom: 10px;">@rule.Title</h4>
+                    <p>@rule.Description</p>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="rule-item">
+                <h4 style="color: var(--dark-green); margin-bottom: 10px;">تسجيل الدخول مطلوب</h4>
+                <p>يجب تسجيل الدخول عبر مسح رمز QR قبل استخدام الماكينة</p>
+            </div>
+            <div class="rule-item">
+                <h4 style="color: var(--dark-green); margin-bottom: 10px;">وقت الجلسة محدود</h4>
+                <p>مدة الجلسة 5 دقائق فقط، وسيتم تسجيل الخروج تلقائياً</p>
+            </div>
+            <div class="rule-item">
+                <h4 style="color: var(--dark-green); margin-bottom: 10px;">اضغط للاكتشاف</h4>
+                <p>يجب الضغط على زر الاكتشاف مع كل عملية لضمان الأمان</p>
+            </div>
+            <div class="rule-item">
+                <h4 style="color: var(--dark-green); margin-bottom: 10px;">مواد نظيفة فقط</h4>
+                <p>تأكد من أن المواد نظيفة وخالية من السوائل</p>
+            </div>
+            <div class="rule-item">
+                <h4 style="color: var(--dark-green); margin-bottom: 10px;">لا تترك حسابك مفتوحاً</h4>
+                <p>يجب تسجيل الخروج بعد الانتهاء لحماية حسابك ونقاطك</p>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Ratings Section -->
+<section class="section">
+    <h2 class="section-title">تقييمات المستخدمين</h2>
+
+    <div class="rating-stats">
+        <div class="average-rating">
+            @String.Format("{0:F1}", Model.AverageRating)
+        </div>
+        <div class="stars">
+            @for (int i = 1; i <= 5; i++)
+            {
+                if (i <= Model.AverageRating)
+                {
+                    <span>★</span>
+                }
+                else
+                {
+                    <span style="color: #ddd;">★</span>
+                }
+            }
+        </div>
+        @* <p>بناءً على @Model.TotalRatings تقييم</p> *@
+    </div>
+@if(User.Identity?.IsAuthenticated == true)
+{
+    <div class="rating-form">
+        <h3 style="text-align: center; color: var(--dark-green); margin-bottom: 30px;">قيم تجربتك</h3>
+        <form asp-controller="Home" asp-action="SubmitRating" method="post">
+            @Html.AntiForgeryToken()
+            <div class="star-rating">
+                <input type="radio" id="star5" name="Rating" value="5" required />
+                <label for="star5">★</label>
+                <input type="radio" id="star4" name="Rating" value="4" />
+                <label for="star4">★</label>
+                <input type="radio" id="star3" name="Rating" value="3" />
+                <label for="star3">★</label>
+                <input type="radio" id="star2" name="Rating" value="2" />
+                <label for="star2">★</label>
+                <input type="radio" id="star1" name="Rating" value="1" />
+                <label for="star1">★</label>
+            </div>
+            <div class="form-group">
+                <label>تعليقك</label>
+                <textarea name="Comment" placeholder="شاركنا تجربتك مع Replace..." required></textarea>
+            </div>
+            <button type="submit" class="submit-button">إرسال التقييم</button>
+        </form>
+    </div>
+}
+</section>
+
+<!-- FAQ Section -->
+<section class="section">
+    <h2 class="section-title">الأسئلة الشائعة</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>كيف أبدأ استخدام Replace؟</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>قم بالتسجيل في الموقع أولاً، ثم توجه إلى أقرب ماكينة Replace وامسح رمز QR الموجود عليها لتسجيل الدخول</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>ما هي المواد المقبولة؟</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>حالياً نقبل الزجاجات البلاستيكية (7 نقاط) والعلب المعدنية (12 نقطة). قريباً سنضيف العلب الكرتونية والأكياس البلاستيكية</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>كيف أستخدم النقاط؟</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>يمكنك استخدام نقاطك لشراء منتجات من المتجر. اختر المنتجات، ضعها في السلة، وأنشئ طلباً. يمكنك استلام طلبك من الفرع الأقرب لك</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>ماذا لو نسيت تسجيل الخروج؟</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>لا تقلق! النظام يقوم بتسجيل الخروج تلقائياً بعد 5 دقائق من تسجيل الدخول لحماية حسابك</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact & Feedback Section -->
+<section class="section">
+    <h2 class="section-title">تواصل معنا</h2>
+    <div class="rating-form">
+        <form asp-controller="Home" asp-action="SubmitContact" method="post">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label>نوع الرسالة</label>
+                <select name="Type" required>
+                    <option value="">اختر نوع الرسالة</option>
+                    <option value="Question">سؤال</option>
+                    <option value="Complaint">شكوى</option>
+                    <option value="Suggestion">اقتراح</option>
+                    <option value="Other">أخرى</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" name="Email" placeholder="your@email.com" required />
+            </div>
+            <div class="form-group">
+                <label>الموضوع</label>
+                <input type="text" name="Subject" placeholder="موضوع الرسالة" required />
+            </div>
+            <div class="form-group">
+                <label>الرسالة</label>
+                <textarea name="Message" placeholder="اكتب رسالتك هنا..." required></textarea>
+            </div>
+            <button type="submit" class="submit-button">إرسال</button>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        // Scroll Animation
+        const sections = document.querySelectorAll('.section');
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const arrow = element.querySelector('.faq-arrow');
+
+            answer.classList.toggle('active');
+            
+            if (answer.classList.contains('active')) {
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                arrow.style.transform = 'rotate(0)';
+            }
+        }
+
+        // Star Rating Interaction
+        const starLabels = document.querySelectorAll('.star-rating label');
+        const starInputs = document.querySelectorAll('.star-rating input');
+
+        starLabels.forEach(label => {
+            label.addEventListener('click', () => {
+                const input = document.getElementById(label.getAttribute('for'));
+                if (input) {
+                    input.checked = true;
+                }
+            });
+        });
+
+        // Auto-hide alert messages after 5 seconds
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 500);
+            });
+        }, 5000);
+    </script>
+}

@@ -1,0 +1,1049 @@
+﻿@{
+    ViewData["Title"] = "Maintenance Monitor";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maintenance Monitor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <style>
+        :root {
+            --bg-deep: #060810;
+            --bg-panel: #0c0f1a;
+            --bg-card: #111525;
+            --accent: #00d4ff;
+            --accent2: #ff6b35;
+            --accent3: #39ff14;
+            --border: #1e2a3a;
+            --text-pri: #e8eef8;
+            --text-sec: #5a7090;
+            --text-dim: #2a3a50;
+            --danger: #ff3366;
+            --warn: #ffb800;
+            --success: #00e676;
+            --font-mono: 'Share Tech Mono', monospace;
+            --font-main: 'Rajdhani', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-pri);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+            body::before {
+                content: '';
+                position: fixed;
+                inset: 0;
+                background-image: linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+                background-size: 40px 40px;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            body::after {
+                content: '';
+                position: fixed;
+                inset: 0;
+                background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.07) 2px, rgba(0,0,0,.07) 4px);
+                pointer-events: none;
+                z-index: 0;
+            }
+
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-rows: auto auto 1fr;
+            gap: 14px;
+            min-height: 100vh;
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+            header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, var(--accent), transparent);
+                animation: scanH 3s linear infinite;
+            }
+
+        @@keyframes scanH {
+            0% {
+                transform: translateX(-100%)
+            }
+
+            100% {
+                transform: translateX(100%)
+            }
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 17px;
+            color: var(--accent);
+            position: relative;
+        }
+
+            .logo-mark::before, .logo-mark::after {
+                content: '';
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                border-color: var(--accent2);
+                border-style: solid;
+            }
+
+            .logo-mark::before {
+                top: -4px;
+                left: -4px;
+                border-width: 2px 0 0 2px;
+            }
+
+            .logo-mark::after {
+                bottom: -4px;
+                right: -4px;
+                border-width: 0 2px 2px 0;
+            }
+
+        .header-title h1 {
+            font-size: 21px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .header-title p {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-sec);
+            letter-spacing: 2px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-dim);
+            transition: all .3s;
+        }
+
+            .status-dot.connected {
+                background: var(--success);
+                box-shadow: 0 0 8px var(--success), 0 0 16px rgba(0,230,118,.3);
+                animation: pulse-dot 2s infinite;
+            }
+
+            .status-dot.error {
+                background: var(--danger);
+                box-shadow: 0 0 8px var(--danger);
+            }
+
+        @@keyframes pulse-dot {
+            0%, 100% {
+                box-shadow: 0 0 8px var(--success),0 0 16px rgba(0,230,118,.3)
+            }
+
+            50% {
+                box-shadow: 0 0 14px var(--success),0 0 30px rgba(0,230,118,.5)
+            }
+        }
+
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,51,102,.12);
+            border: 1px solid rgba(255,51,102,.4);
+            color: var(--danger);
+            padding: 4px 12px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+            .live-badge span {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--danger);
+                animation: blink 1s step-end infinite;
+            }
+
+        @@keyframes blink {
+            0%, 100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+        }
+
+        /* ─── CONTROL BAR ─── */
+        .control-bar {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            padding: 14px 18px;
+        }
+
+        .panel-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-sec);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        /* Arduino panel */
+        .arduino-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .arduino-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .port-info {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-pri);
+        }
+
+            .port-info small {
+                display: block;
+                font-size: 10px;
+                color: var(--text-sec);
+                margin-top: 2px;
+            }
+
+        .btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 7px 16px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all .2s;
+        }
+
+            .btn:hover {
+                background: rgba(0,212,255,.1);
+                box-shadow: 0 0 12px rgba(0,212,255,.3);
+            }
+
+            .btn.danger {
+                border-color: var(--danger);
+                color: var(--danger);
+            }
+
+                .btn.danger:hover {
+                    background: rgba(255,51,102,.1);
+                }
+
+        .warn-msg {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--warn);
+            display: none;
+            line-height: 1.6;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+        }
+
+        .stat-value {
+            font-family: var(--font-mono);
+            font-size: 22px;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: var(--text-sec);
+            letter-spacing: 1px;
+            margin-top: 3px;
+        }
+
+        /* Filters */
+        .filter-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .f-input {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-pri);
+            padding: 7px 11px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            outline: none;
+            transition: border-color .2s;
+        }
+
+            .f-input:focus {
+                border-color: var(--accent);
+            }
+
+            .f-input::placeholder {
+                color: var(--text-dim);
+            }
+
+        .auto-scroll-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-sec);
+            margin-top: 8px;
+        }
+
+        .toggle-box {
+            width: 32px;
+            height: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            position: relative;
+            transition: background .2s;
+        }
+
+            .toggle-box::after {
+                content: '';
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: var(--text-sec);
+                top: 2px;
+                left: 2px;
+                transition: all .2s;
+            }
+
+        .auto-scroll-toggle.active .toggle-box {
+            background: rgba(0,212,255,.2);
+            border-color: var(--accent);
+        }
+
+            .auto-scroll-toggle.active .toggle-box::after {
+                background: var(--accent);
+                left: 18px;
+            }
+
+        /* ─── LOG TABLE ─── */
+        .log-container {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Columns: #  |  Machine  |  Command  |  Date  |  Arduino TX */
+        .log-header, .log-row {
+            display: grid;
+            grid-template-columns: 60px 180px 1fr 200px 150px;
+            align-items: center;
+        }
+
+        .log-header {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-sec);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        .log-body {
+            overflow-y: auto;
+            flex: 1;
+            max-height: calc(100vh - 340px);
+            min-height: 300px;
+            scroll-behavior: smooth;
+        }
+
+            .log-body::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            .log-body::-webkit-scrollbar-track {
+                background: var(--bg-deep);
+            }
+
+            .log-body::-webkit-scrollbar-thumb {
+                background: var(--border);
+            }
+
+                .log-body::-webkit-scrollbar-thumb:hover {
+                    background: var(--accent);
+                }
+
+        .log-row {
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border);
+            transition: background .15s;
+        }
+
+            .log-row:hover {
+                background: rgba(0,212,255,.04);
+            }
+
+            .log-row.new-entry {
+                animation: newEntry .7s ease-out;
+            }
+
+        @@keyframes newEntry {
+            0% {
+                background: rgba(0,212,255,.18);
+                border-left: 3px solid var(--accent);
+            }
+
+            100% {
+                background: transparent;
+                border-left: none;
+            }
+        }
+
+        .log-row.arduino-flash {
+            animation: arduinoFlash .8s ease-out;
+        }
+
+        @@keyframes arduinoFlash {
+            0% {
+                background: rgba(57,255,20,.18);
+            }
+
+            100% {
+                background: transparent;
+            }
+        }
+
+        .cell-id {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .cell-machine {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .machine-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .machine-id {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-dim);
+        }
+
+        .cell-command {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-pri);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding-right: 12px;
+        }
+
+        .cell-date {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-sec);
+        }
+
+        .cell-arduino {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .arduino-indicator {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-dim);
+            transition: color .3s;
+        }
+
+            .arduino-indicator.sent {
+                color: var(--accent3);
+            }
+
+            .arduino-indicator.failed {
+                color: var(--danger);
+            }
+
+        /* Empty state */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            color: var(--text-dim);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+            .empty-state::before {
+                content: '⬡';
+                font-size: 40px;
+                margin-bottom: 16px;
+                opacity: .3;
+            }
+
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            padding: 11px 18px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-pri);
+            animation: slideIn .3s ease-out;
+            max-width: 320px;
+            transition: opacity .3s;
+        }
+
+            .toast.error {
+                border-left-color: var(--danger);
+            }
+
+            .toast.success {
+                border-left-color: var(--success);
+            }
+
+            .toast.warn {
+                border-left-color: var(--warn);
+            }
+
+        @@keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1
+            }
+        }
+
+        @@media(max-width:1100px) {
+            .control-bar {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .log-header, .log-row {
+                grid-template-columns: 50px 160px 1fr 170px;
+            }
+
+            .cell-arduino {
+                display: none;
+            }
+        }
+
+        @@media(max-width:768px) {
+            .header-right {
+                display: none;
+            }
+
+            .control-bar {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+
+        <!-- HEADER -->
+        <header>
+            <div class="header-left">
+                <div class="logo-mark">ML</div>
+                <div class="header-title">
+                    <h1>Maintenance Monitor</h1>
+                    <p>REAL-TIME LOG STREAM &nbsp;/&nbsp; ARDUINO SERIAL BRIDGE</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator">
+                    <div class="status-dot" id="signalrDot"></div>
+                    <span id="signalrStatus" style="color:var(--text-sec)">CONNECTING...</span>
+                </div>
+                <div class="live-badge"><span></span>LIVE</div>
+            </div>
+        </header>
+
+        <!-- CONTROLS -->
+        <div class="control-bar">
+
+            <!-- Arduino -->
+            <div class="panel">
+                <div class="panel-label">// Arduino Serial Bridge</div>
+                <div class="arduino-panel">
+                    <div class="arduino-top">
+                        <div class="status-dot" id="arduinoDot"></div>
+                        <div class="port-info">
+                            <span id="arduinoPortName">NOT CONNECTED</span>
+                            <small id="arduinoPortDetail">اختار الـ COM port من الزرار</small>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:8px">
+                        <button class="btn" id="connectBtn" onclick="connectArduino()">⚡ CONNECT PORT</button>
+                        <button class="btn danger" id="disconnectBtn" onclick="disconnectArduino()" style="display:none">✕ DISCONNECT</button>
+                    </div>
+                    <div class="warn-msg" id="webSerialWarn">⚠ Web Serial API مش مدعوم.<br />استخدم Chrome أو Edge.</div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="panel">
+                <div class="panel-label">// Session Statistics</div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="statTotal">0</div>
+                        <div class="stat-label">TOTAL</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="statNew" style="color:var(--accent3)">0</div>
+                        <div class="stat-label">NEW</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="statSent" style="color:var(--success)">0</div>
+                        <div class="stat-label">SENT</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="statFailed" style="color:var(--danger)">0</div>
+                        <div class="stat-label">FAILED</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="panel">
+                <div class="panel-label">// Filter</div>
+                <div class="filter-row">
+                    <input class="f-input" id="fCommand" placeholder="FILTER COMMAND..." oninput="applyFilter()" />
+                </div>
+                <div class="filter-row" style="margin-top:8px">
+                    <input class="f-input" id="fMachine" placeholder="FILTER MACHINE..." oninput="applyFilter()" />
+                    <button class="btn" style="padding:7px 12px;font-size:11px" onclick="clearFilters()">CLR</button>
+                </div>
+                <div class="auto-scroll-toggle active" id="scrollToggle" onclick="toggleAutoScroll()">
+                    <div class="toggle-box"></div>
+                    <span>AUTO-SCROLL</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- LOG TABLE -->
+        <div class="log-container">
+            <div class="log-header">
+                <span>#ID</span>
+                <span>MACHINE</span>
+                <span>COMMAND</span>
+                <span>MAINTENANCE DATE</span>
+                <span>ARDUINO TX</span>
+            </div>
+            <div class="log-body" id="logBody">
+                <div class="empty-state" id="emptyState">AWAITING DATA STREAM</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // ══════════════════════════════════════════════
+        //  STATE
+        // ══════════════════════════════════════════════
+        const allLogs = [];        // all received entries
+        let autoScroll   = true;
+        let serialPort   = null;
+        let serialWriter = null;
+        let arduinoReady = false;
+        const stats = { total:0, newSession:0, sent:0, failed:0 };
+        let fCommand = '', fMachine = '';
+
+        // ══════════════════════════════════════════════
+        //  SIGNALR
+        // ══════════════════════════════════════════════
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/maintenanceHub")
+            .withAutomaticReconnect([0, 500, 1000, 2000, 5000])
+            .configureLogging(signalR.LogLevel.Warning)
+            .build();
+
+        connection.on("NewMaintenanceEntries", (entries) => {
+            entries.forEach(entry => {
+                allLogs.push({ ...entry, _sent: false, _failed: false });
+                stats.total++;
+                stats.newSession++;
+                updateStats();
+
+                // Send to Arduino immediately — بنبعت الـ Command بالظبط زي ما جاي
+                if (arduinoReady && serialWriter) {
+                    sendToArduino(entry.command, entry.id);
+                }
+            });
+
+            renderNewRows(entries.map(e => e.id));
+
+            if (autoScroll) scrollToBottom();
+        });
+
+        connection.onreconnecting(() => { setSignalRStatus('reconnecting'); toast('Reconnecting...', 'warn'); });
+        connection.onreconnected(() => { setSignalRStatus('connected'); toast('Connection restored', 'success'); });
+        connection.onclose(() => setSignalRStatus('disconnected'));
+
+        async function startSignalR() {
+            setSignalRStatus('connecting');
+            try {
+                await connection.start();
+                setSignalRStatus('connected');
+                toast('SignalR Connected — Watching DB in real-time', 'success');
+            } catch(e) {
+                setSignalRStatus('disconnected');
+                toast('Connection failed, retrying...', 'error');
+                setTimeout(startSignalR, 3000);
+            }
+        }
+
+        function setSignalRStatus(s) {
+            const dot = document.getElementById('signalrDot');
+            const lbl = document.getElementById('signalrStatus');
+            dot.className = 'status-dot';
+            const map = {
+                connected:    ['connected', 'CONNECTED',    'var(--success)'],
+                reconnecting: ['',          'RECONNECTING...','var(--warn)'],
+                disconnected: ['error',     'DISCONNECTED',  'var(--danger)'],
+                connecting:   ['',          'CONNECTING...', 'var(--text-sec)'],
+            };
+            const [cls, txt, col] = map[s] ?? map.connecting;
+            if (cls) dot.classList.add(cls);
+            lbl.textContent = txt;
+            lbl.style.color = col;
+        }
+
+        // ══════════════════════════════════════════════
+        //  ARDUINO — WEB SERIAL API
+        // ══════════════════════════════════════════════
+        async function connectArduino() {
+            if (!('serial' in navigator)) {
+                document.getElementById('webSerialWarn').style.display = 'block';
+                return;
+            }
+            try {
+                serialPort = await navigator.serial.requestPort();
+                await serialPort.open({ baudRate: 9600 });
+                serialWriter = serialPort.writable.getWriter();
+                arduinoReady = true;
+
+                const info = serialPort.getInfo();
+                document.getElementById('arduinoPortName').textContent = 'PORT CONNECTED';
+                document.getElementById('arduinoPortDetail').textContent =
+                    `VID: ${info.usbVendorId ?? '?'}  /  PID: ${info.usbProductId ?? '?'}`;
+                document.getElementById('arduinoDot').classList.add('connected');
+                document.getElementById('connectBtn').style.display = 'none';
+                document.getElementById('disconnectBtn').style.display = 'inline-block';
+                toast('Arduino connected successfully', 'success');
+            } catch(e) {
+                if (e.name !== 'NotFoundError') toast('Serial error: ' + e.message, 'error');
+            }
+        }
+
+        async function disconnectArduino() {
+            try {
+                if (serialWriter) { serialWriter.releaseLock(); serialWriter = null; }
+                if (serialPort)   { await serialPort.close(); serialPort = null; }
+            } catch {}
+            arduinoReady = false;
+            document.getElementById('arduinoPortName').textContent = 'NOT CONNECTED';
+            document.getElementById('arduinoPortDetail').textContent = 'اختار الـ COM port من الزرار';
+            document.getElementById('arduinoDot').className = 'status-dot';
+            document.getElementById('connectBtn').style.display = 'inline-block';
+            document.getElementById('disconnectBtn').style.display = 'none';
+            toast('Arduino disconnected', 'warn');
+        }
+
+        async function sendToArduino(command, entryId) {
+            if (!serialWriter) return;
+            try {
+                // بنبعت الـ command بالظبط كما هو + newline
+                await serialWriter.write(new TextEncoder().encode(command + '\n'));
+                markEntry(entryId, true);
+                stats.sent++;
+            } catch(e) {
+                markEntry(entryId, false);
+                stats.failed++;
+                toast('Arduino send failed: ' + e.message, 'error');
+            }
+            updateStats();
+        }
+
+        function markEntry(entryId, success) {
+            const entry = allLogs.find(l => l.id === entryId);
+            if (entry) { entry._sent = success; entry._failed = !success; }
+
+            const row = document.getElementById('row-' + entryId);
+            if (!row) return;
+            if (success) {
+                row.classList.add('arduino-flash');
+                setTimeout(() => row.classList.remove('arduino-flash'), 900);
+            }
+            const ind = row.querySelector('.arduino-indicator');
+            if (ind) {
+                ind.textContent = success ? '✓ SENT' : '✕ FAILED';
+                ind.className = 'arduino-indicator ' + (success ? 'sent' : 'failed');
+            }
+        }
+
+        // ══════════════════════════════════════════════
+        //  RENDER — only append new rows, never full re-render
+        // ══════════════════════════════════════════════
+        function renderNewRows(newIds) {
+            const body   = document.getElementById('logBody');
+            const empty  = document.getElementById('emptyState');
+
+            const filtered = getFiltered();
+
+            if (filtered.length === 0) {
+                empty.style.display = 'flex';
+                return;
+            }
+            empty.style.display = 'none';
+
+            // Only render rows that don't exist yet and pass the filter
+            const newSet = new Set(newIds);
+            filtered.forEach(entry => {
+                if (!newSet.has(entry.id)) return;          // not a new entry
+                if (document.getElementById('row-' + entry.id)) return;  // already in DOM
+                body.appendChild(buildRow(entry, true));
+            });
+        }
+
+        function buildRow(entry, isNew) {
+            const row = document.createElement('div');
+            row.className = 'log-row' + (isNew ? ' new-entry' : '');
+            row.id = 'row-' + entry.id;
+
+            const dateStr = formatDate(entry.maintenanceDate);
+            const txLabel = entry._sent ? '✓ SENT' : (entry._failed ? '✕ FAILED' : '— PENDING');
+            const txClass = entry._sent ? 'sent' : (entry._failed ? 'failed' : '');
+
+            row.innerHTML = `
+                <div class="cell-id">#${entry.id}</div>
+                <div class="cell-machine">
+                    <span class="machine-name">${esc(entry.machineName)}</span>
+                    <span class="machine-id">ID: ${entry.machineId}</span>
+                </div>
+                <div class="cell-command" title="${esc(entry.command)}">${esc(entry.command)}</div>
+                <div class="cell-date">${dateStr}</div>
+                <div class="cell-arduino">
+                    <span class="arduino-indicator ${txClass}">${txLabel}</span>
+                </div>
+            `;
+
+            if (isNew) setTimeout(() => row.classList.remove('new-entry'), 800);
+            return row;
+        }
+
+        // Full re-render when filters change
+        function renderAll() {
+            const body  = document.getElementById('logBody');
+            const empty = document.getElementById('emptyState');
+            body.querySelectorAll('.log-row').forEach(r => r.remove());
+
+            const filtered = getFiltered();
+            if (filtered.length === 0) { empty.style.display = 'flex'; return; }
+            empty.style.display = 'none';
+            filtered.forEach(e => body.appendChild(buildRow(e, false)));
+        }
+
+        function getFiltered() {
+            let logs = allLogs;
+            if (fCommand) logs = logs.filter(l => l.command?.toLowerCase().includes(fCommand));
+            if (fMachine) logs = logs.filter(l => l.machineName?.toLowerCase().includes(fMachine));
+            return logs;
+        }
+
+        // ══════════════════════════════════════════════
+        //  HELPERS
+        // ══════════════════════════════════════════════
+        function formatDate(ts) {
+            const d = new Date(ts);
+            const p = n => String(n).padStart(2,'0');
+            return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}  ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+        }
+
+        function esc(s) {
+            return String(s ?? '').replace(/[&<>"']/g, c =>
+                ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function scrollToBottom() {
+            const b = document.getElementById('logBody');
+            b.scrollTop = b.scrollHeight;
+        }
+
+        function updateStats() {
+            document.getElementById('statTotal').textContent    = stats.total;
+            document.getElementById('statNew').textContent      = stats.newSession;
+            document.getElementById('statSent').textContent     = stats.sent;
+            document.getElementById('statFailed').textContent   = stats.failed;
+        }
+
+        function toggleAutoScroll() {
+            autoScroll = !autoScroll;
+            document.getElementById('scrollToggle').classList.toggle('active', autoScroll);
+            if (autoScroll) scrollToBottom();
+        }
+
+        function applyFilter() {
+            fCommand = document.getElementById('fCommand').value.toLowerCase().trim();
+            fMachine = document.getElementById('fMachine').value.toLowerCase().trim();
+            renderAll();
+        }
+
+        function clearFilters() {
+            document.getElementById('fCommand').value = '';
+            document.getElementById('fMachine').value = '';
+            fCommand = ''; fMachine = '';
+            renderAll();
+        }
+
+        function toast(msg, type = 'info') {
+            const c = document.getElementById('toastContainer');
+            const el = document.createElement('div');
+            el.className = 'toast ' + type;
+            el.textContent = msg;
+            c.appendChild(el);
+            setTimeout(() => {
+                el.style.opacity = '0';
+                setTimeout(() => el.remove(), 300);
+            }, 3500);
+        }
+
+        // Check browser support
+        if (!('serial' in navigator))
+            document.getElementById('webSerialWarn').style.display = 'block';
+
+        // Boot
+        startSignalR();
+    </script>
+</body>
+</html>
