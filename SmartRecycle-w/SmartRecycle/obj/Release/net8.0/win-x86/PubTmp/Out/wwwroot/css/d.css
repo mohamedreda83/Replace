@@ -1,0 +1,1126 @@
+﻿/* =======================================
+   متغيرات وإعدادات أساسية
+   ======================================= */
+/*:root {*/
+    /* ألوان أساسية */
+    /*--primary-color: #2E8B57;
+    --primary-light: #3daf71;
+    --primary-dark: #1c6b40;
+    --secondary-color: #1A5D3A;
+    --accent-color: #3498db;
+    --accent-light: #5dafea;
+    --accent-dark: #2980b9;*/
+    /* خلفيات وألوان التباين */
+    /*--light-bg: #f8f9fa;
+    --dark-bg: #343a40;
+    --darker-bg: #212529;*/
+    /* ألوان النص */
+    /*--text-light: #ffffff;
+    --text-dark: #212529;
+    --text-muted: #6c757d;*/
+    /* ظلال وحدود */
+    /*--box-shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --box-shadow-md: 0 5px 15px rgba(0, 0, 0, 0.15);
+    --box-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+    --border-radius-sm: 4px;
+    --border-radius: 8px;
+    --border-radius-lg: 12px;*/
+    /* المسافات */
+    /*--spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;*/
+    /* انتقالات */
+    /*--transition-fast: 0.2s;
+    --transition-normal: 0.3s;
+    --transition-slow: 0.5s;
+}*/
+
+/* =======================================
+   إعدادات عامة
+   ======================================= */
+/** {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #f5f5f5;
+    color: var(--text-dark);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}*/
+
+/* =======================================
+   شريط التنقل
+   ======================================= */
+/*.navbar {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: var(--box-shadow-sm);
+    padding: 0.75rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--text-light) !important;
+    display: flex;
+    align-items: center;
+}
+
+    .navbar-brand img {
+        margin-left: 10px;
+        height: 35px;
+        width: auto;
+    }
+
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+    padding: 0.7rem 1rem;
+    transition: all var(--transition-normal) ease;
+    position: relative;
+}
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+        color: var(--text-light) !important;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: var(--border-radius-sm);
+    }*/
+
+        /* إضافة تأثير عند تحديد الرابط */
+        /*.navbar-nav .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 3px;
+            background-color: var(--text-light);
+            border-radius: 3px 3px 0 0;
+        }
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+    padding: var(--spacing-sm);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}*/
+
+/* =======================================
+   القوائم المنسدلة
+   ======================================= */
+/*.dropdown-menu {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-md);
+    margin-top: 0.5rem;
+    min-width: 200px;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all var(--transition-fast) ease;
+    position: relative;
+}
+
+    .dropdown-item:hover {
+        background-color: rgba(46, 139, 87, 0.1);
+        color: var(--primary-color);
+        transform: translateX(5px);
+    }
+
+    .dropdown-item.active {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+    }*/
+
+/* =======================================
+   الملف الشخصي للمستخدم
+   ======================================= */
+/*.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-points {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin-right: 10px;
+    color: var(--text-light);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    transition: all var(--transition-normal) ease;
+}
+
+    .user-points:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .user-points i {
+        margin-left: 5px;
+        color: #FFD700;
+    }
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    color: var(--primary-color);
+    font-size: 18px;
+    font-weight: bold;
+    transition: all var(--transition-normal) ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    .user-avatar:hover {
+        transform: scale(1.1);
+    }*/
+
+/* =======================================
+   البطاقات
+   ======================================= */
+
+/* Card Styling */
+/*.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+    font-weight: 600;
+}
+
+    .card-header.bg-primary {
+        background: linear-gradient(135deg, var(--accent-color), #2980b9) !important;
+    }
+
+    .card-header.bg-success {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    }
+
+.card-header {
+    border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
+}
+
+    .card-header.bg-primary {
+        background: linear-gradient(135deg, var(--accent-color), var(--accent-dark)) !important;
+    }
+
+    .card-header.bg-success {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    }
+
+.card-body {
+    padding: var(--spacing-lg);
+}
+
+.card-footer {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}*/
+
+/* =======================================
+   الأزرار
+   ======================================= */
+/*.btn {
+    border-radius: var(--border-radius-sm);
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    transition: all var(--transition-normal) ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--box-shadow-sm);
+}
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover::before {
+        width: 100%;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--box-shadow-md);
+    }
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: var(--accent-dark);
+        border-color: var(--accent-dark);
+    }
+
+.btn-success {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+    .btn-success:hover, .btn-success:focus {
+        background-color: var(--primary-dark);
+        border-color: var(--primary-dark);
+    }
+
+.btn-outline-primary {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+    .btn-outline-primary:hover {
+        background-color: var(--accent-color);
+        color: var(--text-light);
+    }
+
+.btn-outline-success {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+    .btn-outline-success:hover {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+    }*/
+
+/* =======================================
+   بطاقات المنتجات
+   ======================================= */
+/*.product-card {
+    height: 100%;
+    transition: transform var(--transition-normal) ease, box-shadow var(--transition-normal) ease;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+    .product-card:hover {
+        transform: translateY(-7px);
+        box-shadow: var(--box-shadow-lg);
+    }
+
+.product-img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    transition: all var(--transition-normal) ease;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.05);
+}
+
+.product-title {
+    font-weight: 600;
+    margin-top: var(--spacing-md);
+    font-size: 1.1rem;
+}
+
+.product-price {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: var(--spacing-sm) 0;
+}
+
+.product-description {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-md);
+}*/
+
+/* =======================================
+   الشارات
+   ======================================= */
+/*.badge {
+    padding: 0.5rem 0.8rem;
+    font-weight: 500;
+    border-radius: var(--border-radius-sm);
+}
+
+    .badge.bg-success {
+        background-color: var(--primary-color) !important;
+    }
+
+    .badge.bg-primary {
+        background-color: var(--accent-color) !important;
+    }*/
+
+/* =======================================
+   الجداول
+   ======================================= */
+/*.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow-sm);
+}
+
+    .table thead th {
+        background-color: rgba(0, 0, 0, 0.03);
+        border-bottom: 2px solid #dee2e6;
+        font-weight: 600;
+        padding: 0.75rem;
+        vertical-align: middle;
+    }
+
+    .table tbody tr {
+        transition: all var(--transition-fast) ease;
+    }
+
+        .table tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.01);
+        }
+
+    .table td {
+        padding: 0.75rem;
+        vertical-align: middle;
+        border-top: 1px solid #dee2e6;
+    }*/
+
+/* =======================================
+   الفوتر
+   ======================================= */
+/*footer {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    padding: 2.5rem 0 1.5rem;
+    margin-top: 3rem;
+}
+
+.footer-title {
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    padding-bottom: var(--spacing-sm);
+}
+
+    .footer-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 50px;
+        height: 2px;
+        background-color: var(--primary-color);
+    }
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .footer-links li {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: all var(--transition-fast) ease;
+        display: inline-block;
+    }
+
+        .footer-links a:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+
+.footer-bottom {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.social-icons {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    transition: all var(--transition-normal) ease;
+}
+
+    .social-icon:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-5px);
+    }*/
+
+/* =======================================
+   دعم الأجهزة المحمولة والاستجابة
+   ======================================= */
+
+/* الشاشات الكبيرة والمتوسطة (الأجهزة اللوحية والحواسيب) */
+/*@media (min-width: 992px) {
+    .container {
+        max-width: 1140px;
+    }
+
+    .navbar .container {
+        position: relative;
+    }
+
+    .navbar-collapse {
+        position: static;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 1rem 1.2rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+
+    .user-profile {
+        margin-right: 0;
+    }
+}*/
+
+/* الشاشات المتوسطة (الأجهزة اللوحية) */
+/*@media (min-width: 768px) and (max-width: 991.98px) {
+    .navbar-collapse {
+        padding: 0.5rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
+
+    .card-body {
+        padding: var(--spacing-md);
+    }
+
+    .user-profile {
+        margin-right: 0;
+    }
+
+    .product-img {
+        height: 180px;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+}*/
+
+/* الشاشات الصغيرة (الموبايل) */
+/*@media (max-width: 767.98px) {
+    body {
+        font-size: 15px;
+    }
+
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .navbar-collapse {
+        background-color: var(--secondary-color);
+        border-radius: var(--border-radius);
+        margin-top: var(--spacing-md);
+        padding: var(--spacing-sm);
+        box-shadow: var(--box-shadow-md);
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.7rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-nav .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+
+    .dropdown-menu {
+        background-color: rgba(0, 0, 0, 0.1);
+        border: none;
+        box-shadow: none;
+        border-radius: var(--border-radius-sm);
+        padding: 0.25rem 0;
+        margin: 0.5rem 0;
+    }
+
+    .dropdown-item {
+        color: rgba(255, 255, 255, 0.85);
+        padding: 0.6rem 1.5rem;
+    }
+
+        .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+        }
+
+    .user-profile {
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: var(--spacing-md);
+        padding-top: var(--spacing-md);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .user-points {
+        margin-right: 0;
+    }
+
+    .card {
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .card-body {
+        padding: var(--spacing-md);
+    }
+
+    .product-img {
+        height: 160px;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .footer {
+        text-align: center;
+    }
+
+    .footer-title::after {
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+}*/
+
+/* الشاشات الصغيرة جداً (الموبايل الصغير) */
+/*@media (max-width: 575.98px) {
+    body {
+        font-size: 14px;
+    }
+
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+        .navbar-brand img {
+            height: 28px;
+        }
+
+    .user-profile {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .user-points {
+        margin-bottom: var(--spacing-sm);
+        width: 100%;
+        justify-content: center;
+    }
+
+    .user-avatar {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .card-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .card-body {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    .btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .product-img {
+        height: 140px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .table td, .table th {
+        padding: 0.5rem;
+    }
+}*/
+
+/* =======================================
+   تحسينات عامة وإضافات
+   ======================================= */
+
+/* تأثيرات عامة للعناصر */
+/*.hover-lift {
+    transition: transform var(--transition-normal) ease, box-shadow var(--transition-normal) ease;
+}
+
+    .hover-lift:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--box-shadow-md);
+    }*/
+
+/* تنسيق الصور المدورة */
+/*.rounded-img {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}*/
+
+/* تنسيق العناوين */
+/*h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+}*/
+
+/* تنسيق النصوص */
+/*p {
+    margin-bottom: var(--spacing-md);
+}*/
+
+/* تنسيق الإطارات */
+/*.border-custom {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}*/
+
+/* تنسيق المسافات العامة */
+/*.section {
+    padding: var(--spacing-xl) 0;
+}
+
+.section-sm {
+    padding: var(--spacing-lg) 0;
+}*/
+
+/* تنسيق خلفيات بديلة */
+/*.bg-light-custom {
+    background-color: var(--light-bg);
+}
+
+.bg-primary-subtle {
+    background-color: rgba(46, 139, 87, 0.1);
+}*/
+
+/* تنسيق قائمة العناصر */
+/*.custom-list {
+    list-style: none;
+    padding-right: 0;
+}
+
+    .custom-list li {
+        position: relative;
+        padding-right: 20px;
+        margin-bottom: var(--spacing-sm);
+    }
+
+        .custom-list li:before {
+            content: '✓';
+            color: var(--primary-color);
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+        }*/
+
+/* زر الرجوع لأعلى الصفحة */
+/*.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal) ease;
+    z-index: 99;
+}
+
+    .scroll-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .scroll-to-top:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-5px);
+    }*/
+
+/* تحسين تنسيق النموذج */
+/*.form-control {
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.6rem 1rem;
+    transition: all var(--transition-fast) ease;
+}
+
+    .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(46, 139, 87, 0.25);
+    }*/
+
+/* تحسين تنسيق القوائم المنسدلة في النموذج */
+/*.form-select {
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.6rem 1rem;
+    padding-left: 2rem;
+    transition: all var(--transition-fast) ease;
+}
+
+    .form-select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(46, 139, 87, 0.25);
+    }*/
+
+/* تحسين الأخطاء في النموذج */
+/*.invalid-feedback {
+    display: block;
+    margin-top: 0.25rem;
+    color: #dc3545;
+    font-size: 0.875rem;
+}*/
+
+/* تنسيق المسارات التوجيهية (Breadcrumbs) */
+/*.breadcrumb {
+    background-color: transparent;
+    padding: 0.75rem 0;
+    margin-bottom: var(--spacing-lg);
+}
+
+.breadcrumb-item {
+    color: var(--text-muted);
+}
+
+    .breadcrumb-item a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: all var(--transition-fast) ease;
+    }
+
+        .breadcrumb-item a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+    .breadcrumb-item.active {
+        color: var(--text-dark);
+    }*/
+
+/* تحسين الأيقونات في الواجهة */
+/*.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-sm {
+    width: 30px;
+    height: 30px;
+}
+
+.icon-md {
+    width: 40px;
+    height: 40px;
+}
+
+.icon-lg {
+    width: 50px;
+    height: 50px;
+}
+
+.icon-circle {
+    border-radius: 50%;
+}*/
+
+/* تنسيق الإشعارات */
+/*.notification {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 15px 20px;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-md);
+    z-index: 1000;
+    transform: translateY(-100px);
+    opacity: 0;
+    transition: all var(--transition-normal) ease;
+}
+
+    .notification.show {
+        transform: translateY(0);
+        opacity: 1;
+    }*/
+
+/* تحسين سرعة التحميل */
+/*@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}*/
+
+/* تحسين قابلية الوصول */
+/*:focus {
+    outline: 3px solid rgba(46, 139, 87, 0.25);
+    outline-offset: 2px;
+}*/
+
+/* التمرير السلس */
+/*html {
+    scroll-behavior: smooth;
+}*/
+/* تنسيقات عامة */
+body {
+    direction: rtl;
+    text-align: right;
+}
+
+/* تنسيقات البطاقة */
+.rounded-4 {
+    border-radius: 1rem !important;
+}
+
+/* تنسيقات صورة المنتج */
+.product-image-container {
+    position: relative;
+    min-height: 350px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-height: 500px;
+}
+
+.product-category-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+/* تنسيقات عنوان المنتج */
+.product-title {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 1rem;
+}
+
+/* تنسيقات شارات المنتج */
+.product-highlights {
+    margin-bottom: 1.5rem;
+}
+
+.product-badge {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    font-weight: 600;
+    display: inline-block;
+    color: white;
+}
+
+    .product-badge.price {
+        background-color: #28a745;
+    }
+
+    .product-badge.in-stock {
+        background-color: #17a2b8;
+    }
+
+    .product-badge.out-stock {
+        background-color: #dc3545;
+    }
+
+/* تنسيقات وصف المنتج */
+.description-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+.description-text {
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+/* تنسيقات محدد الكمية */
+.quantity-selector {
+    max-width: 200px;
+}
+
+.btn-quantity {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #dee2e6;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+    .btn-quantity:hover {
+        background-color: #e9ecef;
+    }
+
+.quantity-input {
+    border-radius: 0.5rem;
+    text-align: center;
+    width: 70px;
+    margin: 0 0.5rem;
+    font-weight: 600;
+}
+
+/* تنسيقات أزرار الإجراءات */
+.product-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.add-to-cart-btn {
+    border-radius: 0.5rem;
+    padding: 0.75rem 2rem;
+    transition: all 0.3s;
+}
+
+    .add-to-cart-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+/* تنسيقات التنبيه */
+.product-alert {
+    border-radius: 0.5rem;
+    border-right: 4px solid #ffc107;
+}
+
+/* تنسيقات للشاشات الصغيرة */
+@media (max-width: 991.98px) {
+    .product-image-container {
+        min-height: 250px;
+    }
+
+    .product-title {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .product-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .add-to-cart-btn {
+        width: 100%;
+    }
+}

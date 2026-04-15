@@ -1,0 +1,492 @@
+﻿:root {
+    /* ألوان أساسية محدثة */
+    --primary-color: #1a5a28;
+    --primary-dark: #003d00;
+    --primary-light: #4caf50;
+    --secondary-color: #0277bd;
+    --secondary-dark: #004c8c;
+    --secondary-light: #58a5f0;
+    --success-color: #2e7d32;
+    --danger-color: #d32f2f;
+    --warning-color: #f57c00;
+    --info-color: #0288d1;
+    --light-color: #f8f9fa;
+    --dark-color: #1a1a1a;
+    --muted-color: #6c757d;
+    --white-color: #ffffff;
+    /* تدرجات جديدة */
+    --gradient-primary: linear-gradient(135deg, #1a5a28 0%, #2e7d32 100%);
+    --gradient-secondary: linear-gradient(135deg, #0277bd 0%, #0288d1 100%);
+    /* ظلال محسنة */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.2);
+    /* انتقالات */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: var(--dark-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ===== الناف بار المحسن ===== */
+.navbar {
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-lg);
+    padding: 0.5rem 0;
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    transition: all var(--transition-normal);
+}
+
+    .navbar::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+        pointer-events: none;
+    }
+
+.navbar-brand {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--white-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: all var(--transition-normal);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+    .navbar-brand:hover {
+        color: var(--white-color);
+        transform: scale(1.05);
+    }
+
+    .navbar-brand i {
+        color: #4caf50;
+        margin-left: 0.4rem;
+        font-size: 1.2rem;
+        animation: spin 3s linear infinite;
+    }
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.7rem;
+    margin: 0 0.1rem;
+    border-radius: 8px;
+    transition: all var(--transition-fast);
+    position: relative;
+    backdrop-filter: blur(5px);
+}
+
+    .navbar-nav .nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #4caf50, #81c784);
+        transition: width var(--transition-normal);
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+        color: var(--white-color);
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-sm);
+    }
+
+        .navbar-nav .nav-link:hover::before,
+        .navbar-nav .nav-link.active::before {
+            width: 100%;
+        }
+
+    .navbar-nav .nav-link i {
+        margin-left: 0.3rem;
+        font-size: 0.75rem;
+    }
+
+/* نقاط المستخدم محسنة */
+.user-points {
+    background: linear-gradient(135deg, rgba(255,193,7,0.2) 0%, rgba(255,152,0,0.2) 100%);
+    border: 1px solid rgba(255,193,7,0.3);
+    border-radius: 20px;
+    padding: 0.3rem 0.7rem;
+    margin-left: 0.5rem;
+    color: var(--white-color);
+    font-weight: 600;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    transition: all var(--transition-normal);
+}
+
+    .user-points:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(255,193,7,0.3);
+    }
+
+    .user-points i {
+        color: #ffc107;
+        margin-left: 0.3rem;
+        font-size: 0.7rem;
+        animation: pulse 2s infinite;
+    }
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+/* ملف المستخدم محسن */
+.user-profile {
+    display: flex;
+    align-items: center;
+    color: var(--dark-color);
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
+    transition: all var(--transition-normal);
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: var(--shadow-sm);
+}
+
+    .user-profile:hover {
+        background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(240,242,245,1) 100%);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        color: var(--dark-color);
+    }
+
+.user-avatar {
+    width: 1.8rem;
+    height: 1.8rem;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem;
+    color: var(--white-color);
+    font-size: 0.7rem;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+}
+
+.user-profile:hover .user-avatar {
+    transform: rotate(360deg);
+}
+
+/* القائمة المنسدلة محسنة */
+.dropdown-menu {
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--shadow-xl);
+    padding: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    margin-top: 0.5rem;
+    animation: dropdownFadeIn 0.2s ease;
+}
+
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    font-size: 0.8rem;
+    transition: all var(--transition-fast);
+    border-radius: 8px;
+    margin: 0.1rem 0.5rem;
+    color: var(--dark-color);
+}
+
+    .dropdown-item:hover {
+        background: linear-gradient(135deg, var(--primary-light) 0%, var(--success-color) 100%);
+        color: var(--white-color);
+        transform: translateX(5px);
+    }
+
+    .dropdown-item i {
+        margin-left: 0.5rem;
+        width: 1rem;
+        text-align: center;
+        font-size: 0.75rem;
+    }
+
+.dropdown-divider {
+    margin: 0.5rem 1rem;
+    opacity: 0.2;
+}
+
+/* أزرار تسجيل الدخول والتسجيل */
+.btn-outline-light {
+    border: 2px solid rgba(255,255,255,0.7);
+    color: var(--white-color);
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    margin-left: 0.5rem;
+    transition: all var(--transition-normal);
+    backdrop-filter: blur(5px);
+}
+
+    .btn-outline-light:hover {
+        background: var(--white-color);
+        color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--white-color);
+    }
+
+.btn-light {
+    background: linear-gradient(135deg, var(--white-color) 0%, #f8f9fa 100%);
+    border: none;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+}
+
+    .btn-light:hover {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+/* محتوى الصفحة */
+.main-content {
+    padding: 2rem 0;
+    min-height: calc(100vh - 120px);
+}
+
+.hero-section {
+    background: linear-gradient(135deg, rgba(26,90,40,0.1) 0%, rgba(46,125,50,0.1) 100%);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+    .hero-section h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-section p {
+        font-size: 1.1rem;
+        color: var(--muted-color);
+        margin-bottom: 2rem;
+    }
+
+.feature-card {
+    background: rgba(255,255,255,0.9);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 2rem;
+}
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-xl);
+    }
+
+    .feature-card i {
+        font-size: 3rem;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--dark-color);
+    }
+
+    .feature-card p {
+        color: var(--muted-color);
+        line-height: 1.6;
+    }
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.3rem 0;
+    }
+
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+        .navbar-brand i {
+            font-size: 1rem;
+            margin-left: 0.3rem;
+        }
+
+    .navbar-nav .nav-link {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .user-points {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+        margin-left: 0.3rem;
+    }
+
+    .user-profile {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .user-avatar {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.6rem;
+        margin-left: 0.3rem;
+    }
+
+    .btn-outline-light,
+    .btn-light {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .hero-section {
+        padding: 2rem 1rem;
+    }
+
+        .hero-section h1 {
+            font-size: 2rem;
+        }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+        .feature-card i {
+            font-size: 2.5rem;
+        }
+}
+
+@media (max-width: 576px) {
+    .navbar-nav .nav-link span {
+        display: none;
+    }
+
+    .navbar-nav .nav-link i {
+        margin-left: 0;
+    }
+
+    .user-profile span {
+        display: none;
+    }
+
+    .hero-section h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* تأثيرات إضافية */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* أنيميشن للتحميل */
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(46,125,50,0.3);
+    border-top: 4px solid var(--success-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}

@@ -1,0 +1,123 @@
+[
+  {
+    "ContainingType": "SmartRecycle.Controllers.DetectionsController",
+    "Method": "CreateDetection",
+    "RelativePath": "api/Detections",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SmartRecycle.Controllers.DetectionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartRecycle.Controllers.DetectionsController",
+    "Method": "GetAllDetections",
+    "RelativePath": "api/Detections",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "limit",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartRecycle.Controllers.DetectionsController",
+    "Method": "DeleteAllDetections",
+    "RelativePath": "api/Detections",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartRecycle.Controllers.DetectionsController",
+    "Method": "GetDetectionById",
+    "RelativePath": "api/Detections/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartRecycle.Controllers.DetectionsController",
+    "Method": "GetByDateRange",
+    "RelativePath": "api/Detections/date-range",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "startDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartRecycle.Controllers.DetectionsController",
+    "Method": "GetByMachine",
+    "RelativePath": "api/Detections/machine/{machineId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "machineId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartRecycle.Controllers.DetectionsController",
+    "Method": "SaveDetection",
+    "RelativePath": "api/Detections/save",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SmartRecycle.Controllers.DetectionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SmartRecycle.Controllers.DetectionsController",
+    "Method": "GetStatistics",
+    "RelativePath": "api/Detections/statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
