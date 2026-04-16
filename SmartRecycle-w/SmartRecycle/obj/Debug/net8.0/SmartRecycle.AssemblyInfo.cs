@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartRecycle")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ad5562365b21ba464b0a47b66fa2bb431c89e769")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+686eaf4ce027d42d7cae8bac8a2613f9b9836297")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartRecycle")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartRecycle")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

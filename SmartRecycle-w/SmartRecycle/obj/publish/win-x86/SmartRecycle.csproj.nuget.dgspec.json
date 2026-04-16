@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mohamed Reda\\Desktop\\RePlace Repo\\Replace\\SmartRecycle-w\\SmartRecycle\\SmartRecycle.csproj": {}
+    "C:\\Users\\sd.FATHALLAIATS\\Desktop\\Capstone\\Replace\\SmartRecycle-w\\SmartRecycle\\SmartRecycle.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mohamed Reda\\Desktop\\RePlace Repo\\Replace\\SmartRecycle-w\\SmartRecycle\\SmartRecycle.csproj": {
+    "C:\\Users\\sd.FATHALLAIATS\\Desktop\\Capstone\\Replace\\SmartRecycle-w\\SmartRecycle\\SmartRecycle.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mohamed Reda\\Desktop\\RePlace Repo\\Replace\\SmartRecycle-w\\SmartRecycle\\SmartRecycle.csproj",
+        "projectUniqueName": "C:\\Users\\sd.FATHALLAIATS\\Desktop\\Capstone\\Replace\\SmartRecycle-w\\SmartRecycle\\SmartRecycle.csproj",
         "projectName": "SmartRecycle",
-        "projectPath": "C:\\Users\\Mohamed Reda\\Desktop\\RePlace Repo\\Replace\\SmartRecycle-w\\SmartRecycle\\SmartRecycle.csproj",
-        "packagesPath": "C:\\Users\\Mohamed Reda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mohamed Reda\\Desktop\\RePlace Repo\\Replace\\SmartRecycle-w\\SmartRecycle\\obj\\publish\\win-x86\\",
+        "projectPath": "C:\\Users\\sd.FATHALLAIATS\\Desktop\\Capstone\\Replace\\SmartRecycle-w\\SmartRecycle\\SmartRecycle.csproj",
+        "packagesPath": "C:\\Users\\sd.FATHALLAIATS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sd.FATHALLAIATS\\Desktop\\Capstone\\Replace\\SmartRecycle-w\\SmartRecycle\\obj\\publish\\win-x86\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mohamed Reda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sd.FATHALLAIATS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -42,9 +43,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
+          "auditMode": "all"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -100,7 +101,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using SmartRecycle.Models;
 using SmartRecycle.Repositories;
@@ -34,6 +34,14 @@ builder.Services.AddCors(options =>
         policy.AllowAnyOrigin()
               .AllowAnyMethod()
               .AllowAnyHeader();
+    });
+    // SignalR needs credentials support
+    options.AddPolicy("SignalRPolicy", policy =>
+    {
+        policy.SetIsOriginAllowed(_ => true)
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
     });
 });
 
@@ -95,6 +103,8 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapHub<MaintenanceHub>("/maintenanceHub");
+// ✅ Flutter real-time sync hub
+app.MapHub<SmartRecycle.Hubs.MachineStateHub>("/hubs/machineState");
 
 app.MapControllerRoute(
     name: "default",

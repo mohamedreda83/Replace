@@ -78,6 +78,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ✅ SignalR for real-time Flutter sync -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
 
     <!-- WebGL Background -->
     <script>
@@ -392,6 +394,9 @@
             document.getElementById('detectionStatus').classList.add('show');
             document.getElementById('resultsContainer').innerHTML = '';
 
+            // ✅ Tell Flutter to show loading animation
+            await notifyDetectionStarted();
+
             const enabled = await enableESP();
             if (!enabled) {
                 stopPolling();
@@ -449,6 +454,34 @@
         }, 30000);
 
         window.onload = async () => await enableESP();
+
+        // ✅ SignalR — listen for ForceLogout from Flutter app
+        (function initSignalR() {
+            const conn = new signalR.HubConnectionBuilder()
+                .withUrl("/hubs/machineState")
+                .withAutomaticReconnect()
+                .build();
+
+            conn.on("ForceLogout", () => {
+                alert("تم تسجيل الخروج عن طريق التطبيق");
+                window.location.href = '@Url.Action("LogoutFromMachine", "Machines")';
+            });
+
+            conn.on("PointsUpdated", data => {
+                document.getElementById("userPoints").textContent = data.newTotalPoints;
+            });
+
+            conn.start().then(() => {
+                conn.invoke("SubscribeToMachine", machineId.toString());
+            }).catch(err => console.warn("SignalR:", err));
+        })();
+
+        // ✅ Notify Flutter when detection starts / no-item-detected
+        async function notifyDetectionStarted() {
+            try {
+                await fetch(`/api/machines/${machineId}/detection-started`, { method: "POST" });
+            } catch(e) {}
+        }
     </script>
 
     @Html.AntiForgeryToken()
